@@ -7,22 +7,21 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/invoice.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.InventoryController">
+<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.InventoryController">
 
      <!-- Inventory Table -->
-     <TableView fx:id="inventoryTable" layoutX="846.0" layoutY="65.0" prefHeight="731.0" prefWidth="604.0">
+     <TableView fx:id="inventoryTable" layoutX="846.0" layoutY="106.0" prefHeight="690.0" prefWidth="604.0">
          <columns>
              <TableColumn fx:id="nameColumn" prefWidth="251.0" text="Item Name" />
              <TableColumn fx:id="quantityColumn" prefWidth="351.0" text="Quantity" />
          </columns>
      </TableView>
-
-     <!-- Title -->
-     <Label layoutX="36.0" layoutY="34.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Inventory" />
-      <TextField fx:id="itemNameField" layoutX="143.0" layoutY="301.0" prefHeight="52.0" prefWidth="285.0" promptText="Product Name" />
-      <TextField fx:id="itemQuantityField" layoutX="143.0" layoutY="378.0" prefHeight="52.0" prefWidth="285.0" promptText="Quantity" />
-       <Button layoutX="167.0" layoutY="460.0" onAction="#handleAddItem" prefHeight="40.0" prefWidth="227.0" text="Add" />
-       <Button layoutX="167.0" layoutY="524.0" onAction="#handleUpdateItem" prefHeight="40.0" prefWidth="101.0" text="Update" />
-       <Button layoutX="293.0" layoutY="524.0" onAction="#handleDeleteItem" prefHeight="40.0" prefWidth="101.0" text="Delete" />
+      <TextField fx:id="itemNameField" layoutX="146.0" layoutY="303.0" prefHeight="52.0" prefWidth="285.0" promptText="Product Name" stylesheets="@../CSS/All.css" />
+      <TextField fx:id="itemQuantityField" layoutX="146.0" layoutY="380.0" prefHeight="52.0" prefWidth="285.0" promptText="Quantity" />
+       <Button layoutX="144.0" layoutY="462.0" onAction="#handleAddItem" prefHeight="52.0" prefWidth="285.0" text="Add" />
+       <Button layoutX="144.0" layoutY="530.0" onAction="#handleUpdateItem" prefHeight="52.0" prefWidth="132.0" text="Update" />
+       <Button layoutX="297.0" layoutY="530.0" onAction="#handleDeleteItem" prefHeight="52.0" prefWidth="132.0" text="Delete" />
+   <Label layoutX="61.0" layoutY="51.0" styleClass="task-title" text="Inventory" />
+   <Button fx:id="refreshBtn" layoutX="1318.0" layoutY="25.0" onAction="#handleDeleteItem" prefHeight="52.0" prefWidth="132.0" text="Refresh" />
 
 </AnchorPane>

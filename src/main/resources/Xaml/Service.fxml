@@ -7,34 +7,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/Task.css"
-            xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            fx:controller="com.salon.Controller.ServiceController">
+<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.ServiceController">
 
     <!-- Heading -->
-    <Label layoutX="50.0" layoutY="30.0" styleClass="task-title" text="💈 Add New Service" />
-
-    <!-- Service Name -->
-    <Label layoutX="57.0" layoutY="160.0" text="Service Name:" />
-    <TextField fx:id="nameField" layoutX="180.0" layoutY="155.0" prefWidth="300.0" promptText="Enter service name" />
-
-    <!-- Service Price -->
-    <Label layoutX="57.0" layoutY="230.0" text="Price (Rs.):" />
-    <TextField fx:id="priceField" layoutX="180.0" layoutY="225.0" prefWidth="300.0" promptText="Enter price" />
+    <Label layoutX="51.0" layoutY="45.0" styleClass="task-title" text="💈 Add New Service" />
+    <TextField fx:id="nameField" layoutX="138.0" layoutY="225.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter service name" stylesheets="@../CSS/All.css" />
+    <TextField fx:id="priceField" layoutX="138.0" layoutY="317.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter price" />
 
     <!-- Add Service Button -->
-    <Button fx:id="addButton" layoutX="180.0" layoutY="290.0" onAction="#onAddService" prefWidth="200.0" text="➕ Add Service" />
+    <Button fx:id="addButton" layoutX="166.0" layoutY="409.0" onAction="#onAddService" prefHeight="51.0" prefWidth="245.0" text="➕ Add Service" />
 
     <!-- Delete Button -->
-    <Button fx:id="deleteButton" layoutX="180.0" layoutY="340.0" onAction="#onDeleteService" prefWidth="200.0" text="🗑 Delete Selected" />
+    <Button fx:id="deleteButton" layoutX="166.0" layoutY="479.0" onAction="#onDeleteService" prefHeight="51.0" prefWidth="245.0" text="🗑 Delete Selected" />
 
     <!-- Services Table -->
-    <TableView fx:id="serviceTable" layoutX="564.0" layoutY="121.0" prefHeight="677.0" prefWidth="891.0">
+    <TableView fx:id="serviceTable" layoutX="612.0" layoutY="122.0" prefHeight="677.0" prefWidth="849.0">
         <columns>
             <TableColumn fx:id="nameCol" prefWidth="450.0" text="Service Name" />
             <TableColumn fx:id="priceCol" prefWidth="400.0" text="Price (Rs.)" />
         </columns>
     </TableView>
+   <Button fx:id="refreshBtn" layoutX="1329.0" layoutY="34.0" onAction="#handleRefresh" prefHeight="52.0" prefWidth="132.0" text="Refresh" />
 
 </AnchorPane>

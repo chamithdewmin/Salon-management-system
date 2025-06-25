@@ -9,10 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1500.0" styleClass="root" stylesheets="@../CSS/addRate.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.AppointmentController">
-
-   <!-- Header -->
-   <Label layoutX="82.0" layoutY="80.0" prefHeight="30.0" prefWidth="233.0" styleClass="incomeLableTpic" text="Add New Appointment" />
+<AnchorPane prefHeight="800.0" prefWidth="1500.0" styleClass="root" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.AppointmentController">
 
    <!-- Form Inputs -->
    <DatePicker fx:id="appointmentDate" layoutX="82.0" layoutY="162.0" prefHeight="49.0" prefWidth="249.0" promptText="Appointment Date" styleClass="Date" />
@@ -47,5 +44,6 @@
       </columns>
    </TableView>
    <Button layoutX="211.0" layoutY="594.0" onAction="#handleDelete" prefHeight="45.0" prefWidth="120.0" text="Delete" />
+   <Label layoutX="52.0" layoutY="47.0" styleClass="task-title" text="Add New Appointment" />
 
 </AnchorPane>

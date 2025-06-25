@@ -1,39 +1,33 @@
 package com.salon.Model;
 
 public class FinanceRecord {
-    private double income;
-    private double expenses;
     private String date;
     private String description;
+    private double amount; // renamed from income/expenses to common 'amount'
 
-    public FinanceRecord(double income, double expenses) {
-        this.income = income;
-        this.expenses = expenses;
-    }
+    private double incomeTotal;
+    private double expenseTotal;
 
-    public FinanceRecord(String date, String description, double income) {
+    // For inserting income/expense
+    public FinanceRecord(String date, String description, double amount) {
         this.date = date;
         this.description = description;
-        this.income = income;
+        this.amount = amount;
     }
 
-    public double getIncome() {
-        return income;
+    // For summary
+    public FinanceRecord(double incomeTotal, double expenseTotal) {
+        this.incomeTotal = incomeTotal;
+        this.expenseTotal = expenseTotal;
     }
 
-    public double getExpenses() {
-        return expenses;
-    }
+    public String getDate() { return date; }
+    public String getDescription() { return description; }
+    public double getAmount() { return amount; }
 
+    public double getIncome() { return incomeTotal; }
+    public double getExpenses() { return expenseTotal; }
     public double getSaved() {
-        return income - expenses;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getDescription() {
-        return description;
+        return incomeTotal - expenseTotal;
     }
 }

@@ -1,0 +1,182 @@
+/* === ROOT AND FONTS === */
+.root {
+    -fx-background-color: #121212;
+    -fx-font-family: "JetBrains Mono", "Consolas", sans-serif;
+}
+
+/* === GENERAL LABELS === */
+.label {
+    -fx-text-fill: #F0F0F0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* === TEXTFIELDS & COMBOBOX SHARED STYLE === */
+.text-field,
+.combo-box {
+    -fx-background-color: #2e2e2e;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-border-color: #444444;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 8 12;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(one-pass-box, #00000033, 3, 0, 1, 1);
+}
+
+/* === FOCUS HIGHLIGHT === */
+.text-field:focused,
+.combo-box:focused {
+    -fx-border-color: #00C6A2;
+}
+
+/* === COMBOBOX DROPDOWN STYLING === */
+.combo-box .list-cell {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: #2e2e2e;
+    -fx-border-color: #444444;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #00C6A2;
+    -fx-text-fill: #121212;
+}
+
+/* === DATEPICKER === */
+.date-picker {
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #444444;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10;
+    -fx-font-size: 13px;
+}
+
+.date-picker .text-field {
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: #f0f0f0;
+    -fx-prompt-text-fill: #888888;
+    -fx-border-color: #333;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 6;
+}
+.date-picker .arrow-button:hover {
+    -fx-background-color: #2c2c2c;
+}
+
+.date-picker-popup {
+    -fx-background-color: #0f0f0f;
+    -fx-border-color: #2a2a2a;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}
+
+.date-picker .month-year-pane {
+    -fx-background-color: #121212;
+    -fx-padding: 8 0;
+    -fx-border-color: #1e1e1e;
+}
+
+.date-picker .label {
+    -fx-text-fill: #e0e0e0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.date-picker .left-button,
+.date-picker .right-button {
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 6;
+    -fx-padding: 4;
+}
+.date-picker .left-button:hover,
+.date-picker .right-button:hover {
+    -fx-background-color: #2c2c2c;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #ffffff;
+}
+
+.date-picker .calendar-grid {
+    -fx-background-color: #0f0f0f;
+    -fx-text-fill: #ffffff;
+}
+
+.date-picker .day-cell {
+    -fx-background-color: #0f0f0f;
+    -fx-text-fill: #dddddd;
+    -fx-font-size: 13px;
+    -fx-alignment: center;
+    -fx-border-radius: 5;
+}
+.date-picker .day-cell:hover {
+    -fx-background-color: #1f1f1f;
+    -fx-text-fill: #ffffff;
+}
+.date-picker .day-cell.today {
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: #00e676;
+}
+.date-picker .day-cell:selected {
+    -fx-background-color: #00C6A2;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+.date-picker .day-cell:disabled {
+    -fx-text-fill: #555555;
+}
+
+/* === BUTTONS === */
+.button {
+    -fx-background-color: #00C6A2;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #00000088, 4, 0, 2, 2);
+}
+.button:hover {
+    -fx-background-color: #1DE9B6;
+}
+
+/* === TABLE VIEW === */
+.table-view {
+    -fx-background-color: #1A1A1A;
+    -fx-border-color: #2C2C2C;
+    -fx-text-fill: #F0F0F0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.table-view .column-header {
+    -fx-background-color: #242424;
+    -fx-text-fill: #00C6A2;
+}
+.table-view .cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 14px;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: #14d900;
+    -fx-text-fill: white;
+}
+
+/* === SCROLLBAR === */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: #222;
+}

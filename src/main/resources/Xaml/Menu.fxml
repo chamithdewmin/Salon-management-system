@@ -73,6 +73,6 @@
          </ImageView>
       </graphic>
    </Button>
-   <Label layoutX="39.0" layoutY="101.0" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE" />
+   <Label layoutX="41.0" layoutY="101.0" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE" />
 
 </AnchorPane>

@@ -34,7 +34,20 @@ public class FinanceRecordDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, record.getDate());
             stmt.setString(2, record.getDescription());
-            stmt.setDouble(3, record.getIncome());
+            stmt.setDouble(3, record.getAmount());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean insertExpense(FinanceRecord record) {
+        String sql = "INSERT INTO expense (date, description, amount) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, record.getDate());
+            stmt.setString(2, record.getDescription());
+            stmt.setDouble(3, record.getAmount());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

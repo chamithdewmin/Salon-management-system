@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 public class ServiceController {
 
+    public Button refreshBtn;
     @FXML private TextField nameField;
     @FXML private TextField priceField;
     @FXML private TableView<Service> serviceTable;
@@ -92,6 +93,12 @@ public class ServiceController {
             CustomAlert.showAlert(Alert.AlertType.ERROR, "Load Error", "Could not load services.");
         }
     }
+
+    @FXML
+    private void handleRefresh() {
+        loadServices();
+    }
+
 
     private void clearForm() {
         nameField.clear();

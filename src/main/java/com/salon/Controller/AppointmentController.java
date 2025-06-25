@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AppointmentController {
 
+    public Button updateButton;
     @FXML private TextField clientName;
     @FXML private TextField clientContact;
     @FXML private DatePicker appointmentDate;
