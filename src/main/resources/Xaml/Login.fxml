@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="588.0" prefWidth="508.0" styleClass="root" stylesheets="@../CSS/Login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.LoginController">
+
+    <!-- Finzo Logo -->
+    <ImageView fitHeight="111.0" fitWidth="308.0" layoutX="100.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/finzo%20logo.png" />
+    </ImageView>
+
+    <!-- Copyright Label -->
+    <Label layoutX="188.0" layoutY="542.0" styleClass="copyright-label" text="© Copyright by LOGOZO" />
+
+    <!-- Slogan -->
+    <Label layoutX="127.0" layoutY="129.0" prefHeight="16.0" prefWidth="254.0" styleClass="slogan-label" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE" />
+
+    <!-- Username Field -->
+    <TextField fx:id="usernaemTxt" layoutX="119.0" layoutY="199.0" prefHeight="45.0" prefWidth="270.0" promptText="Username" styleClass="username" />
+
+    <!-- Password Field -->
+    <PasswordField fx:id="PasswordTxt" layoutX="119.0" layoutY="281.0" prefHeight="45.0" prefWidth="270.0" promptText="Password" styleClass="password" />
+
+    <!-- Show Password Checkbox -->
+    <CheckBox fx:id="showPassword" layoutX="280.0" layoutY="344.0" mnemonicParsing="false" styleClass="show-password" text="Show Password" />
+
+    <Button fx:id="LoginBtn" layoutX="119.0" layoutY="401.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="270.0" styleClass="login-button" text="🔒 Login" />
+
+    <!-- Bio / Description -->
+    <Label layoutX="64.0" layoutY="469.0" prefWidth="380.0" styleClass="bio-label" text="SharpStyle is your go-to grooming companion, making it easy to manage your haircuts, beard trims, and styling needs with professional care and modern flair." textAlignment="CENTER" wrapText="true" />
+</AnchorPane>

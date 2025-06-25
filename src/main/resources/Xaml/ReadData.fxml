@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1500.0" styleClass="root" stylesheets="@../CSS/Read.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.ReadDataController">
+
+    <!-- Income Table -->
+    <TableView fx:id="incomeTable" layoutX="74.0" layoutY="125.0" prefHeight="616.0" prefWidth="630.0">
+        <columns>
+            <TableColumn fx:id="incomeDateCol" prefWidth="157.0" text="Date" />
+            <TableColumn fx:id="incomeDescCol" prefWidth="318.0" text="Description" />
+            <TableColumn fx:id="incomeValueCol" prefWidth="153.0" text="Amount (Rs)" />
+        </columns>
+    </TableView>
+
+    <!-- Expense Table -->
+    <TableView fx:id="expenseTable" layoutX="796.0" layoutY="124.0" prefHeight="616.0" prefWidth="630.0">
+        <columns>
+            <TableColumn fx:id="expenseDateCol" prefWidth="130.0" text="Date" />
+            <TableColumn fx:id="expenseDescCol" prefWidth="276.0" text="Description" />
+            <TableColumn fx:id="expenseCategoryCol" prefWidth="77.0" text="Type" />
+            <TableColumn fx:id="expenseValueCol" prefWidth="145.0" text="Amount (Rs)" />
+        </columns>
+    </TableView>
+
+    <!-- Section Labels -->
+    <Label layoutX="227.0" layoutY="32.0" prefHeight="73.0" prefWidth="286.0" styleClass="incomeLable" text="Income Records" />
+    <Label layoutX="1013.0" layoutY="32.0" prefHeight="73.0" prefWidth="286.0" styleClass="ExpenceLable" text="Expense Records" />
+
+    <!-- Refresh and Filter Controls -->
+    <DatePicker fx:id="filterDatePicker" layoutX="571.0" layoutY="37.0" prefHeight="42.0" prefWidth="267.0" promptText="YYYY-MM-DD" />
+    <Button layoutX="858.0" layoutY="37.0" onAction="#handleFilterByMonth" prefHeight="45.0" prefWidth="134.0" text="Apply Filter" />
+    <Button fx:id="refreshButton" layoutX="671.0" layoutY="767.0" onAction="#handleRefresh" prefHeight="45.0" prefWidth="175.0" styleClass="refreshButton" text="Reload Records" />
+
+    <!-- Delete Buttons -->
+    <Button fx:id="deleteIncomeBtn" layoutX="74.0" layoutY="758.0" onAction="#handleDeleteIncome" prefHeight="45.0" prefWidth="187.0" stylesheets="@../CSS/Read.css" text="Remove Income Entry" />
+    <Button fx:id="deleteExpenseBtn" layoutX="1239.0" layoutY="767.0" onAction="#handleDeleteExpense" prefHeight="45.0" prefWidth="187.0" text="Remove Expense Entry" />
+</AnchorPane>

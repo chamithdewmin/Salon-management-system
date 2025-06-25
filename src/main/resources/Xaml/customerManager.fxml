@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/Task.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.salon.Controller.CustomerController">
+
+    <!-- Heading -->
+    <Label layoutX="50.0" layoutY="30.0" styleClass="task-title" text="👤 Add New Customer" />
+
+    <!-- Name -->
+    <Label layoutX="57.0" layoutY="100.0" text="Full Name:" />
+    <TextField fx:id="nameField" layoutX="180.0" layoutY="95.0" prefWidth="300.0" promptText="Enter full name" />
+
+    <!-- Phone -->
+    <Label layoutX="57.0" layoutY="160.0" text="Phone:" />
+    <TextField fx:id="phoneField" layoutX="180.0" layoutY="155.0" prefWidth="300.0" promptText="Enter phone number" />
+
+    <!-- Email -->
+    <Label layoutX="57.0" layoutY="220.0" text="Email:" />
+    <TextField fx:id="emailField" layoutX="180.0" layoutY="215.0" prefWidth="300.0" promptText="Enter email address" />
+
+    <!-- Gender -->
+    <Label layoutX="57.0" layoutY="280.0" text="Gender:" />
+    <ComboBox fx:id="genderBox" layoutX="180.0" layoutY="275.0" prefWidth="300.0" promptText="Select gender" />
+
+    <!-- Join Date -->
+    <Label layoutX="57.0" layoutY="340.0" text="Join Date:" />
+    <DatePicker fx:id="joinDatePicker" layoutX="180.0" layoutY="335.0" prefWidth="300.0" />
+
+    <!-- Add Button -->
+    <Button fx:id="addCustomerButton" layoutX="180.0" layoutY="400.0" onAction="#onAddCustomer" prefWidth="200.0" text="➕ Add Customer" />
+
+    <!-- Customer Table -->
+    <TableView fx:id="customerTable" layoutX="564.0" layoutY="121.0" prefHeight="677.0" prefWidth="891.0">
+        <columns>
+            <TableColumn fx:id="nameCol" prefWidth="200.0" text="Name" />
+            <TableColumn fx:id="phoneCol" prefWidth="150.0" text="Phone" />
+            <TableColumn fx:id="emailCol" prefWidth="200.0" text="Email" />
+            <TableColumn fx:id="genderCol" prefWidth="100.0" text="Gender" />
+            <TableColumn fx:id="joinDateCol" prefWidth="150.0" text="Join Date" />
+        </columns>
+    </TableView>
+
+</AnchorPane>

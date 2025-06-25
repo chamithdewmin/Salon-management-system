@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.salon.Controller.SmsSenderController">
+
+    <RadioButton fx:id="selectAllRadio" layoutX="144.0" layoutY="180.0" text="Send to All Customers" onAction="#toggleAllContacts"/>
+
+    <Label layoutX="144.0" layoutY="220.0" text="Number :" />
+    <TextField fx:id="numberTxt" layoutX="144.0" layoutY="252.0" prefHeight="52.0" prefWidth="261.0"/>
+
+    <Label layoutX="144.0" layoutY="361.0" text="Message :" />
+    <TextArea fx:id="massageTxt" layoutX="144.0" layoutY="396.0" prefHeight="232.0" prefWidth="512.0"/>
+
+    <Button layoutX="144.0" layoutY="650.0" prefWidth="120.0" prefHeight="45.0"
+            mnemonicParsing="false" text="Send" onAction="#sendSms"/>
+
+</AnchorPane>

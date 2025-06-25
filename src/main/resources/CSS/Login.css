@@ -1,0 +1,68 @@
+.root {
+    -fx-background-color: #1A1A1A;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Username TextField */
+.text-field.username {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color: transparent;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1;
+    -fx-padding: 10 15 10 15;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+/* Password Field */
+.password-field.password {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-background-color: transparent;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1;
+    -fx-padding: 10 15 10 15;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+/* Login Button */
+.button.login-button {
+    -fx-background-color: #2e7d32;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 2);
+}
+
+.button.login-button:hover {
+    -fx-background-color: #1b5e20;
+}
+
+/* Show Password Checkbox */
+.check-box.show-password {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+.slogan-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff;
+    -fx-alignment: center;
+}
+
+.bio-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #7f8c8d;
+    -fx-alignment: center;
+}
+
+.copyright-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #95a5a6;
+    -fx-font-style: italic;
+    -fx-alignment: center;
+}

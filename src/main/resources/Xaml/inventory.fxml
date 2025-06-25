@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/invoice.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.InventoryController">
+
+     <!-- Inventory Table -->
+     <TableView fx:id="inventoryTable" layoutX="846.0" layoutY="65.0" prefHeight="731.0" prefWidth="604.0">
+         <columns>
+             <TableColumn fx:id="nameColumn" prefWidth="251.0" text="Item Name" />
+             <TableColumn fx:id="quantityColumn" prefWidth="351.0" text="Quantity" />
+         </columns>
+     </TableView>
+
+     <!-- Title -->
+     <Label layoutX="36.0" layoutY="34.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Inventory" />
+      <TextField fx:id="itemNameField" layoutX="143.0" layoutY="301.0" prefHeight="52.0" prefWidth="285.0" promptText="Product Name" />
+      <TextField fx:id="itemQuantityField" layoutX="143.0" layoutY="378.0" prefHeight="52.0" prefWidth="285.0" promptText="Quantity" />
+       <Button layoutX="167.0" layoutY="460.0" onAction="#handleAddItem" prefHeight="40.0" prefWidth="227.0" text="Add" />
+       <Button layoutX="167.0" layoutY="524.0" onAction="#handleUpdateItem" prefHeight="40.0" prefWidth="101.0" text="Update" />
+       <Button layoutX="293.0" layoutY="524.0" onAction="#handleDeleteItem" prefHeight="40.0" prefWidth="101.0" text="Delete" />
+
+</AnchorPane>

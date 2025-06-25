@@ -1,0 +1,112 @@
+/* Root background */
+.root {
+    -fx-background-color: #121212;
+    -fx-font-family: "JetBrains Mono", "Consolas", sans-serif;
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #EAEAEA;
+    -fx-font-size: 16px;
+}
+
+/* Section Title */
+.task-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00C6A2;
+}
+
+/* Text Fields and ComboBoxes */
+.text-field,
+.text-area,
+.date-picker,
+.combo-box {
+    -fx-background-color: #1F1F1F;
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #AAAAAA;
+    -fx-border-color: #333333;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #00C6A2;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(one-pass-box, #00000066, 4, 0, 2, 2);
+    -fx-cursor: hand;
+}
+.button:hover {
+    -fx-background-color: #1DE9B6;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #1A1A1A;
+    -fx-border-color: #2C2C2C;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-text-fill: #E0E0E0;
+}
+
+.table-view .column-header {
+    -fx-background-color: #242424;
+    -fx-text-fill: #00C6A2;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-view .cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 14px;
+}
+
+/* Green color for selected row */
+.table-row-cell:filled:selected,
+.table-row-cell:focused:selected {
+    -fx-background-color: #14d900;
+    -fx-text-fill: white;
+}
+
+/* Priority color styling inside cell */
+.table-cell.priority-high {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+.table-cell.priority-medium {
+    -fx-text-fill: orange;
+    -fx-font-weight: bold;
+}
+.table-cell.priority-low {
+    -fx-text-fill: green;
+    -fx-font-weight: bold;
+}
+
+/* Remaining Days Color */
+.table-cell.remaining-today {
+    -fx-text-fill: yellow;
+    -fx-font-weight: bold;
+}
+.table-cell.remaining-overdue {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+
+/* Scrollbar styling */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: #222;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #14d900;
+    -fx-text-fill: white;
+}
