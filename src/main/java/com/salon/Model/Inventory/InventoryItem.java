@@ -1,4 +1,4 @@
-package com.salon.Model;
+package com.salon.Model.Inventory;
 
 import javafx.beans.property.*;
 

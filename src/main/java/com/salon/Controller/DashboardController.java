@@ -1,6 +1,10 @@
 package com.salon.Controller;
 
 import com.salon.Model.*;
+import com.salon.Model.Customers.Customer;
+import com.salon.Model.Customers.CustomerDAO;
+import com.salon.Model.Services.Service;
+import com.salon.Model.Services.ServiceDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,18 +17,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class DashboardController {
 
+    @FXML private Label income_value;
+    @FXML private Label expenses_value;
+    @FXML private Label saved_value;
     @FXML private PieChart PieChart;
+
     @FXML private ComboBox<String> customerNameComboBox;
     @FXML private ComboBox<String> serviceComboBox;
     @FXML private ListView<String> selectedServiceList;
     @FXML private TextField totalAmountField;
     @FXML private TextField cashGivenField;
     @FXML private TextField changeField;
+
     @FXML private Button addServiceButton;
     @FXML private Button refreshButton;
     @FXML private Button addPaymentButton;
@@ -41,6 +49,7 @@ public class DashboardController {
             loadServiceOptions();
             loadCustomerNames();
             setupCustomerAutoComplete();
+            updateFinanceBlocks();
         } else {
             showAlert("Database Connection Failed", "Unable to connect to the database.");
         }
@@ -78,14 +87,17 @@ public class DashboardController {
     private void setupCustomerAutoComplete() {
         customerNameComboBox.setEditable(true);
         customerNameComboBox.getEditor().textProperty().addListener((obs, oldText, newText) -> {
-            if (!customerNameComboBox.isShowing()) customerNameComboBox.show();
+            if (!customerNameComboBox.isShowing()) {
+                customerNameComboBox.show();
+            }
 
-            List<String> filtered = allCustomerNames.stream()
-                    .filter(name -> name.toLowerCase().startsWith(newText.toLowerCase()))
-                    .collect(Collectors.toList());
+            ObservableList<String> filtered = FXCollections.observableArrayList(
+                    allCustomerNames.stream()
+                            .filter(name -> name.toLowerCase().startsWith(newText.toLowerCase()))
+                            .collect(Collectors.toList())
+            );
 
-            customerNameComboBox.setItems(FXCollections.observableArrayList(filtered));
-            customerNameComboBox.getEditor().setText(newText);
+            customerNameComboBox.setItems(filtered);
             customerNameComboBox.getEditor().positionCaret(newText.length());
         });
     }
@@ -99,25 +111,31 @@ public class DashboardController {
         }
     }
 
-    @FXML
-    private void handleRefresh() {
-        if (conn != null) {
-            customerNameComboBox.getItems().clear();
-            serviceComboBox.getItems().clear();
-            selectedServices.clear();
-            totalAmountField.clear();
-            cashGivenField.clear();
-            changeField.clear();
-            allCustomerNames.clear();
+    private void calculateTotalAmount() {
+        double total = 0.0;
 
-            try {
-                loadCustomerNames();
-                loadServiceOptions();
-            } catch (Exception e) {
-                showAlert("Refresh Failed", e.getMessage());
+        for (String selected : selectedServices) {
+            for (Service service : allServices) {
+                if (service.getName().equals(selected)) {
+                    total += service.getPrice();
+                    break;
+                }
             }
-        } else {
-            showAlert("Database Error", "Connection is not available.");
+        }
+
+        totalAmountField.setText(String.format("%.2f", total));
+    }
+
+
+    @FXML
+    private void calculateBalance() {
+        try {
+            double total = Double.parseDouble(totalAmountField.getText().trim());
+            double cash = Double.parseDouble(cashGivenField.getText().trim());
+            double change = cash - total;
+            changeField.setText(String.format("%.2f", change));
+        } catch (NumberFormatException e) {
+            changeField.setText("");
         }
     }
 
@@ -137,50 +155,70 @@ public class DashboardController {
             String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             String description = customerName + " - " + services;
 
-            Income income = new Income(currentDate, description, totalAmount);
-            IncomeDAO incomeDAO = new IncomeDAO(conn);
+            FinanceRecord record = new FinanceRecord(currentDate, description, totalAmount);
+            FinanceRecordDAO financeDAO = new FinanceRecordDAO(conn);
 
-            boolean success = incomeDAO.insertIncome(income);
-
+            boolean success = financeDAO.insertIncome(record);
             if (success) {
-                showAlert("Success", "Payment added to income table.");
+                showAlert("Success", "Payment recorded successfully.");
                 handleRefresh();
             } else {
-                showAlert("Failure", "Payment could not be saved.");
+                showAlert("Failure", "Could not record payment.");
             }
         } catch (Exception e) {
-            showAlert("Database Error", "Failed to insert income: " + e.getMessage());
+            showAlert("Database Error", "Failed to add payment: " + e.getMessage());
         }
-    }
-
-    private void calculateTotalAmount() {
-        double total = 0.0;
-        for (String selected : selectedServices) {
-            Optional<Service> matching = allServices.stream()
-                    .filter(service -> service.getName().equals(selected))
-                    .findFirst();
-            if (matching.isPresent()) {
-                total += matching.get().getPrice();
-            }
-        }
-        totalAmountField.setText(String.format("%.2f", total));
     }
 
     @FXML
-    private void calculateBalance() {
-        try {
-            double total = Double.parseDouble(totalAmountField.getText().trim());
-            double cash = Double.parseDouble(cashGivenField.getText().trim());
-            double change = cash - total;
-            changeField.setText(String.format("%.2f", change));
-        } catch (NumberFormatException e) {
-            changeField.setText("");
+    private void handleRefresh() {
+        if (conn != null) {
+            customerNameComboBox.getItems().clear();
+            serviceComboBox.getItems().clear();
+            selectedServices.clear();
+            totalAmountField.clear();
+            cashGivenField.clear();
+            changeField.clear();
+            allCustomerNames.clear();
+
+            try {
+                loadCustomerNames();
+                loadServiceOptions();
+                updateFinanceBlocks();
+            } catch (Exception e) {
+                showAlert("Refresh Failed", e.getMessage());
+            }
+        } else {
+            showAlert("Database Error", "Connection is not available.");
         }
     }
 
+    private void updateFinanceBlocks() {
+        try {
+            FinanceRecordDAO financeDAO = new FinanceRecordDAO(conn);
+            FinanceRecord record = financeDAO.getFinanceSummary();
+
+            income_value.setText(String.format("%.2f", record.getIncome()));
+            expenses_value.setText(String.format("%.2f", record.getExpenses()));
+            saved_value.setText(String.format("%.2f", record.getSaved()));
+
+            updatePieChart(record);
+        } catch (SQLException e) {
+            showAlert("Finance Load Error", e.getMessage());
+        }
+    }
+
+    private void updatePieChart(FinanceRecord record) {
+        PieChart.getData().clear();
+        PieChart.getData().add(new PieChart.Data("Income", record.getIncome()));
+        PieChart.getData().add(new PieChart.Data("Expenses", record.getExpenses()));
+        PieChart.getData().add(new PieChart.Data("Saved", record.getSaved()));
+    }
+
     private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
     }

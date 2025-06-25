@@ -1,7 +1,7 @@
 package com.salon.Controller;
 
-import com.salon.Model.InventoryDAO;
-import com.salon.Model.InventoryItem;
+import com.salon.Model.Inventory.InventoryDAO;
+import com.salon.Model.Inventory.InventoryItem;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

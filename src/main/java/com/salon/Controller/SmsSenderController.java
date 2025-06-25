@@ -1,7 +1,7 @@
 package com.salon.Controller;
 
-import com.salon.Model.Customer;
-import com.salon.Model.CustomerDAO;
+import com.salon.Model.Customers.Customer;
+import com.salon.Model.Customers.CustomerDAO;
 import com.salon.Model.DatabaseConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

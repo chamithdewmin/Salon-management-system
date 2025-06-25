@@ -1,7 +1,7 @@
 package com.salon.Controller;
 
-import com.salon.Model.Service;
-import com.salon.Model.ServiceDAO;
+import com.salon.Model.Services.Service;
+import com.salon.Model.Services.ServiceDAO;
 import com.salon.Utils.CustomAlert;
 import com.salon.Model.DatabaseConnection;
 import javafx.collections.FXCollections;

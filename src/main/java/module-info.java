@@ -15,4 +15,8 @@ module com.savingRate.SavingRate {
     exports com.salon;
     opens com.salon.Views to javafx.fxml;
     opens com.salon.Utils to javafx.base, javafx.fxml;
+    opens com.salon.Model.Appointment to javafx.base;
+    opens com.salon.Model.Customers to javafx.base;
+    opens com.salon.Model.Inventory to javafx.base;
+    opens com.salon.Model.Services to javafx.base;
 }

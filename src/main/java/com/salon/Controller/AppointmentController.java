@@ -1,6 +1,10 @@
 package com.salon.Controller;
 
 import com.salon.Model.*;
+import com.salon.Model.Appointment.Appointment;
+import com.salon.Model.Appointment.AppointmentDAO;
+import com.salon.Model.Services.Service;
+import com.salon.Model.Services.ServiceDAO;
 import com.salon.Utils.CustomAlert;
 import com.salon.Utils.SmsService;
 import javafx.collections.FXCollections;

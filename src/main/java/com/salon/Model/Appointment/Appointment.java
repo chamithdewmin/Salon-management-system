@@ -1,4 +1,4 @@
-package com.salon.Model;
+package com.salon.Model.Appointment;
 
 import java.sql.Date;
 import java.sql.Time;

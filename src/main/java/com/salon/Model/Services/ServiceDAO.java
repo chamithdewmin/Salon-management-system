@@ -1,6 +1,4 @@
-package com.salon.Model;
-
-import com.salon.Model.DatabaseConnection;
+package com.salon.Model.Services;
 
 import java.sql.*;
 import java.util.ArrayList;

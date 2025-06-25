@@ -1,4 +1,4 @@
-package com.salon.Model;
+package com.salon.Model.Customers;
 
 import java.sql.*;
 import java.util.ArrayList;

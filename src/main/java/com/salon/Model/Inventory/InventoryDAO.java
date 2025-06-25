@@ -1,6 +1,5 @@
-package com.salon.Model;
+package com.salon.Model.Inventory;
 
-import com.salon.Model.InventoryItem;
 import com.salon.Model.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

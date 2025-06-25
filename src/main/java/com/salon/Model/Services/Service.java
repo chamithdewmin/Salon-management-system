@@ -1,4 +1,4 @@
-package com.salon.Model;
+package com.salon.Model.Services;
 
 public class Service {
     private int id;

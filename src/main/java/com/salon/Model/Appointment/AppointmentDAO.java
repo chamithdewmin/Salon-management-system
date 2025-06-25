@@ -1,4 +1,6 @@
-package com.salon.Model;
+package com.salon.Model.Appointment;
+
+import com.salon.Model.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
