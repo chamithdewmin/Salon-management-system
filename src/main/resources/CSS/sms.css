@@ -23,7 +23,7 @@
     -fx-text-fill: #00C6A2;
 }
 
-/* === INPUT FIELDS === */
+/* === INPUT FIELDS (TextField & TextArea) === */
 .text-field,
 .text-area {
     -fx-background-color: #1F1F1F;
@@ -40,7 +40,13 @@
 .text-field:focused,
 .text-area:focused {
     -fx-border-color: #00C6A2;
-    -fx-effect: dropshadow(one-pass-box, #00C6A233, 5, 0, 2, 2);
+    -fx-effect: dropshadow(one-pass-box, #00C6A244, 5, 0, 2, 2);
+}
+
+/* === TEXTAREA EXTRA DARK BACKGROUND === */
+.text-area {
+    -fx-background-color: #1A1A1A;
+    -fx-text-fill: #000000;
 }
 
 /* === RADIO BUTTON === */
@@ -68,35 +74,21 @@
     -fx-background-color: #1DE9B6;
 }
 
-/* === SCROLLBAR === */
+/* === SCROLLBAR STYLING === */
 .scroll-bar:vertical,
 .scroll-bar:horizontal {
     -fx-background-color: transparent;
 }
+
 .scroll-bar .track {
     -fx-background-color: #1F1F1F;
 }
+
 .scroll-bar .thumb {
     -fx-background-color: #444;
     -fx-background-radius: 6;
 }
+
 .scroll-bar .thumb:hover {
     -fx-background-color: #00C6A2;
-}
-
-.text-area {
-    -fx-background-color: #1A1A1A;          /* Dark grey background */
-    -fx-text-fill: #00000;                 /* White text */
-    -fx-prompt-text-fill: #AAAAAA;          /* Light gray placeholder */
-    -fx-border-radius: 8px;
-    -fx-background-radius: 8px;
-    -fx-padding: 10px;
-    -fx-font-size: 14px;
-    -fx-effect: none;                       /* No shadow */
-}
-
-/* Focused effect */
-.text-area:focused {
-    -fx-border-color: #00C6A2;              /* Aqua green focus */
-    -fx-effect: dropshadow(one-pass-box, #00C6A244, 5, 0, 2, 2);
 }

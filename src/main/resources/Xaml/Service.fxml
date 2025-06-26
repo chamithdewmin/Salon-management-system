@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.ServiceController">
 
     <!-- Heading -->
-    <Label layoutX="51.0" layoutY="45.0" styleClass="task-title" text="💈 Add New Service" />
+    <Label layoutX="68.0" layoutY="45.0" styleClass="task-title" text="Add New Service" />
     <TextField fx:id="nameField" layoutX="138.0" layoutY="225.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter service name" stylesheets="@../CSS/All.css" />
     <TextField fx:id="priceField" layoutX="138.0" layoutY="317.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter price" />
 

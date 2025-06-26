@@ -8,6 +8,8 @@ module com.savingRate.SavingRate {
     requires static org.apache.poi.ooxml;
     requires mysql.connector.j;
     requires itextpdf;
+    requires java.desktop;
+
 
     opens com.salon.Model to javafx.base;
     opens com.salon.Controller to javafx.fxml;
@@ -19,4 +21,5 @@ module com.savingRate.SavingRate {
     opens com.salon.Model.Customers to javafx.base;
     opens com.salon.Model.Inventory to javafx.base;
     opens com.salon.Model.Services to javafx.base;
+    opens com.salon.Model.Finance to javafx.base;
 }

@@ -49,7 +49,7 @@ public class ViewFactory {
     public AnchorPane showSettingView() {
         if (settingView == null) {
             try {
-                settingView = new FXMLLoader(getClass().getResource("/Xaml/ReadData.fxml")).load();
+                settingView = new FXMLLoader(getClass().getResource("/Xaml/Report.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }

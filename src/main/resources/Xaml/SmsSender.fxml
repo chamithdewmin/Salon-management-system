@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -8,16 +9,22 @@
 
 <AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/sms.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.SmsSenderController">
 
-    <!-- Send to All Radio -->
-    <RadioButton fx:id="selectAllRadio" layoutX="144.0" layoutY="231.0" onAction="#toggleAllContacts" text="Select All Customers" />
+    <!-- Select All Customers -->
+    <RadioButton fx:id="selectAllRadio" layoutX="675.0" layoutY="226.0" onAction="#toggleAllContacts" styleClass="radio-button" text="Select All Customers" />
 
-    <!-- Mobile Number Field -->
-    <TextField fx:id="numberTxt" layoutX="148.0" layoutY="301.0" prefHeight="52.0" prefWidth="261.0" promptText="Number :" />
+    <!-- Number Label -->
+    <Label layoutX="144.0" layoutY="188.0" styleClass="label" text="Phone Number:" />
+
+    <!-- Number Input -->
+    <TextField fx:id="numberTxt" layoutX="144.0" layoutY="213.0" prefHeight="45.0" prefWidth="400.0" promptText="Enter mobile number" styleClass="text-field" />
+
+    <!-- Message Label -->
+    <Label layoutX="144.0" layoutY="300.0" styleClass="label" text="Message:" />
 
     <!-- Message Input -->
-    <TextArea fx:id="massageTxt" layoutX="144.0" layoutY="387.0" prefHeight="232.0" prefWidth="512.0" promptText="Message :" styleClass="text-field" />
+    <TextArea fx:id="massageTxt" layoutX="144.0" layoutY="325.0" prefHeight="285.0" prefWidth="800.0" promptText="Type your message here..." styleClass="text-area" />
 
     <!-- Send Button -->
-    <Button fx:id="sendButton" layoutX="144.0" layoutY="648.0" onAction="#sendSms" prefHeight="52.0" prefWidth="134.0" text="Send" />
-
+    <Button fx:id="sendButton" layoutX="794.0" layoutY="633.0" onAction="#sendSms" prefHeight="50.0" prefWidth="150.0" styleClass="primary-button" text="Send" />
+   <Label layoutX="67.0" layoutY="54.0" styleClass="task-title" text="Send SMS to Customers" />
 </AnchorPane>

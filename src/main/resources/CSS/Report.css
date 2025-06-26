@@ -1,0 +1,108 @@
+/* === ROOT STYLING === */
+.root {
+    -fx-background-color: #121212;
+    -fx-font-family: "JetBrains Mono", "Segoe UI", sans-serif;
+}
+
+/* === LABELS === */
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.label-title {
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+.summary-label {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+/* === BUTTONS === */
+.button {
+    -fx-background-color: #00FFB0;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #00e6a0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,255,176,0.3), 10, 0, 0, 4);
+}
+
+/* === REFRESH BUTTON CUSTOM (YELLOW) === */
+#refreshButton {
+    -fx-background-color: #FFD700;
+    -fx-text-fill: black;
+}
+
+/* === COMBOBOX & DATEPICKER === */
+.combo-box,
+.date-picker {
+    -fx-background-color: #2c2c2c;
+    -fx-border-color: #555;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #bbbbbb;
+}
+
+/* === DROPDOWN POPUP === */
+.combo-box-popup .list-view {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+/* === DATEPICKER POPUP === */
+.date-picker-popup {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: white;
+}
+
+/* === TABLEVIEW === */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #333333;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 40px;
+    -fx-border-color: transparent;
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.table-row-cell {
+    -fx-background-color: #1e1e1e;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:filled:selected, .table-cell:filled:selected {
+    -fx-background-color: #00FFB066;
+    -fx-text-fill: black;
+}
+
+/* === SUMMARY BOXES (VBox) === */
+.summary-box {
+    -fx-background-color: #2c2c2c;
+    -fx-padding: 20;
+    -fx-background-radius: 15;
+    -fx-spacing: 10;
+}

@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.monthlySave</groupId>
     <artifactId>monthlySave</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -11,11 +11,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>21</java.version>
         <junit.version>5.10.0</junit.version>
     </properties>
 
     <dependencies>
-        <!-- JavaFX -->
+        <!-- ✅ JavaFX -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -27,14 +28,14 @@
             <version>21</version>
         </dependency>
 
-        <!-- MySQL Connector -->
+        <!-- ✅ MySQL JDBC -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
 
-        <!-- Apache POI for Excel -->
+        <!-- ✅ Apache POI for Excel Export -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
@@ -46,14 +47,14 @@
             <version>5.2.2</version>
         </dependency>
 
-        <!-- ✅ Correct iText PDF (BaseColor supported) -->
+        <!-- ✅ iText PDF Generator (Classic 5.x for BaseColor) -->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.5.13.2</version>
         </dependency>
 
-        <!-- JUnit 5 -->
+        <!-- ✅ JUnit 5 for Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -66,6 +67,20 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- ✅ Optional: Commons IO for File Utilities -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <!-- ✅ Optional: Java AWT graphics (used internally for charts) -->
+        <dependency>
+            <groupId>org.swinglabs</groupId>
+            <artifactId>swingx</artifactId>
+            <version>1.6.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -76,16 +91,18 @@
         </resources>
 
         <plugins>
+            <!-- ✅ Java Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>21</source>
-                    <target>21</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
 
+            <!-- ✅ JavaFX Maven Plugin -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -95,13 +112,10 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>com.monthlysave.monthlysave/com.salon.Main</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

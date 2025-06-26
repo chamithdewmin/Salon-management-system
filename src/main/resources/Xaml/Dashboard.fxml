@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1500.0" stylesheets="@../CSS/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.DashboardController">
+<AnchorPane prefHeight="1000.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.DashboardController">
 
     <!-- Pie Chart Panel -->
     <AnchorPane layoutX="935.0" layoutY="528.0" prefHeight="382.0" prefWidth="502.0" style="-fx-background-color: #1A1A1A; -fx-background-radius: 30px;">
@@ -48,24 +48,6 @@
 
     <!-- Refresh Button -->
     <Button fx:id="refreshButton" layoutX="1309.0" layoutY="26.0" onAction="#handleRefresh" prefHeight="40.0" prefWidth="128.0" text="Refresh" />
-
-    <!-- SAVED Block -->
-    <AnchorPane layoutX="565.0" layoutY="26.0" prefHeight="125.0" prefWidth="220.0" styleClass="savedBox" stylesheets="@../CSS/Dashboard.css">
-        <Label layoutX="14.0" layoutY="6.0" styleClass="label-title" text="Net Savings" />
-        <Label fx:id="saved_value" layoutX="20.0" layoutY="25.0" prefHeight="75.0" prefWidth="180.0" styleClass="savedValue" />
-    </AnchorPane>
-
-    <!-- INCOME Block -->
-    <AnchorPane layoutX="52.0" layoutY="26.0" prefHeight="125.0" prefWidth="220.0" styleClass="incomeBox">
-        <Label layoutX="14.0" layoutY="6.0" styleClass="label-title" text="Total Income" />
-        <Label fx:id="income_value" layoutX="20.0" layoutY="25.0" prefHeight="75.0" prefWidth="180.0" styleClass="incomeValue" />
-    </AnchorPane>
-
-    <!-- EXPENSES Block -->
-    <AnchorPane layoutX="309.0" layoutY="26.0" prefHeight="125.0" prefWidth="220.0" styleClass="expensesBox">
-        <Label layoutX="14.0" layoutY="6.0" styleClass="label-title" text="Total Expenses" />
-        <Label fx:id="expenses_value" layoutX="20.0" layoutY="25.0" prefHeight="75.0" prefWidth="180.0" styleClass="expensesValue" />
-    </AnchorPane>
     <AnchorPane layoutX="935.0" layoutY="110.0" prefHeight="382.0" prefWidth="502.0" style="-fx-background-color: #1A1A1A; -fx-background-radius: 30px;">
         <Button fx:id="expenceBtn" layoutX="129.0" layoutY="292.0" onAction="#handleAddExpense" prefHeight="40.0" prefWidth="244.0" text="Add Expence" />
         <DatePicker fx:id="expenceDate" layoutX="127.0" layoutY="61.0" prefHeight="49.0" prefWidth="249.0" promptText="Expence Date" styleClass="Date" />

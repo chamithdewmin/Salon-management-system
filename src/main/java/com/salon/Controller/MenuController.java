@@ -25,7 +25,7 @@ public class MenuController {
     private void initialize() {
         dashboardButton.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.DASHBOARD));
         AddRateButton.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.ADD_RATE));
-        SettingButton.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.READ_DATA));
+        SettingButton.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.REPORT));
         taskBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.TASK));
         smsBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.SMS));
         customerBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.CUSTOMER));

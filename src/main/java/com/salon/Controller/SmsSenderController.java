@@ -3,6 +3,7 @@ package com.salon.Controller;
 import com.salon.Model.Customers.Customer;
 import com.salon.Model.Customers.CustomerDAO;
 import com.salon.Model.DatabaseConnection;
+import com.salon.Utils.CustomAlert;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class SmsSenderController {
 
+    public Button sendButton;
     @FXML private TextField numberTxt;
     @FXML private TextArea massageTxt;
     @FXML private RadioButton selectAllRadio;
@@ -34,7 +36,7 @@ public class SmsSenderController {
         String messageTemplate = massageTxt.getText().trim();
 
         if (messageTemplate.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Input Error", "Please enter a message.");
+            CustomAlert.showAlert("Input Error", "Please enter a message.");
             return;
         }
 
@@ -44,31 +46,39 @@ public class SmsSenderController {
                 List<Customer> customers = dao.getAllCustomers();
 
                 for (Customer customer : customers) {
+                    String number = formatPhoneNumber(customer.getPhone());
                     String personalizedMessage = String.format("Dear Customer, %s - Salon Magical", messageTemplate);
-                    sendMessageToNumber(customer.getPhone(), personalizedMessage);
+                    sendMessageToNumber(number, personalizedMessage);
                 }
 
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Messages sent to all customers!");
+                CustomAlert.showSuccess("Messages sent to all customers!");
                 massageTxt.clear();
             } catch (Exception e) {
-                showAlert(Alert.AlertType.ERROR, "Error", "Error sending messages: " + e.getMessage());
+                CustomAlert.showAlert("Error", "Error sending messages: " + e.getMessage());
                 e.printStackTrace();
             }
 
         } else {
             String number = numberTxt.getText().trim();
             if (number.isEmpty()) {
-                showAlert(Alert.AlertType.WARNING, "Input Error", "Please enter the phone number.");
+                CustomAlert.showAlert("Input Error", "Please enter the phone number.");
                 return;
             }
 
-            String message = String.format("Dear Customer, %s - Salon Magical", messageTemplate);
+            try {
+                String formattedNumber = formatPhoneNumber(number);
+                String message = String.format("Dear Customer, %s - Salon Magical", messageTemplate);
 
-            boolean success = sendMessageToNumber(number, message);
-            if (success) {
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Message sent successfully!");
-                numberTxt.clear();
-                massageTxt.clear();
+                boolean success = sendMessageToNumber(formattedNumber, message);
+                if (success) {
+                    CustomAlert.showSuccess("Message sent successfully!");
+                    numberTxt.clear();
+                    massageTxt.clear();
+                } else {
+                    CustomAlert.showAlert("Failed", "Failed to send the message.");
+                }
+            } catch (IllegalArgumentException ex) {
+                CustomAlert.showAlert("Phone Number Error", ex.getMessage());
             }
         }
     }
@@ -101,11 +111,20 @@ public class SmsSenderController {
         }
     }
 
-    private void showAlert(Alert.AlertType type, String title, String msg) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
+    /**
+     * Converts any valid local SL number to international format: 94XXXXXXXXX
+     */
+    private String formatPhoneNumber(String raw) {
+        String cleaned = raw.replaceAll("\\D", ""); // Remove non-digits
+
+        if (cleaned.startsWith("0") && cleaned.length() == 10) {
+            return "94" + cleaned.substring(1);
+        } else if (cleaned.startsWith("94") && cleaned.length() == 11) {
+            return cleaned;
+        } else if (cleaned.length() == 9) {
+            return "94" + cleaned;
+        } else {
+            throw new IllegalArgumentException("Invalid Sri Lankan phone number: " + raw);
+        }
     }
 }

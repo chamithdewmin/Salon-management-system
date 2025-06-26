@@ -3,7 +3,7 @@ package com.salon.Views;
 public enum ViewOption {
     DASHBOARD,
     ADD_RATE,
-    READ_DATA,
+    REPORT,
     TASK,
     SMS,
     CUSTOMER,
