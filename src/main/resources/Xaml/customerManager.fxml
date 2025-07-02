@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.CustomerController">
+<AnchorPane prefHeight="850.0" prefWidth="1700.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.CustomerController">
 
     <!-- Heading -->
     <Label layoutX="58.0" layoutY="47.0" styleClass="task-title" text="Add New Customer" />
@@ -23,14 +23,18 @@
     <Button fx:id="addCustomerButton" layoutX="135.0" layoutY="606.0" onAction="#onAddCustomer" prefHeight="49.0" prefWidth="249.0" text="➕ Add Customer" />
 
     <!-- Customer Table -->
-    <TableView fx:id="customerTable" layoutX="564.0" layoutY="121.0" prefHeight="677.0" prefWidth="891.0">
+    <TableView fx:id="customerTable" layoutX="559.0" layoutY="111.0" prefHeight="687.0" prefWidth="1005.0">
         <columns>
-            <TableColumn fx:id="nameCol" prefWidth="192.0" text="Name" />
-            <TableColumn fx:id="phoneCol" prefWidth="182.0" text="Phone" />
-            <TableColumn fx:id="emailCol" prefWidth="221.0" text="Email" />
-            <TableColumn fx:id="genderCol" prefWidth="111.0" text="Gender" />
-            <TableColumn fx:id="joinDateCol" prefWidth="183.0" text="Join Date" />
+            <TableColumn fx:id="nameCol" prefWidth="206.0" text="Name" />
+            <TableColumn fx:id="phoneCol" prefWidth="176.0" text="Phone" />
+            <TableColumn fx:id="emailCol" prefWidth="268.0" text="Email" />
+            <TableColumn fx:id="genderCol" prefWidth="123.0" text="Gender" />
+            <TableColumn fx:id="joinDateCol" prefWidth="230.0" text="Join Date" />
         </columns>
     </TableView>
+   <Button fx:id="updateBtn" layoutX="135.0" layoutY="678.0" onAction="#onUpdateCustomer" prefHeight="49.0" prefWidth="117.0" text="Update" />
+   <Button fx:id="deleteBtn" layoutX="266.0" layoutY="678.0" onAction="#onDeleteCustomer" prefHeight="49.0" prefWidth="117.0" text="Delete" />
+   <TextField fx:id="searchBox" layoutX="1191.0" layoutY="38.0" prefHeight="49.0" prefWidth="219.0" />
+   <Button fx:id="searchBtn" layoutX="1447.0" layoutY="38.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="117.0" text="Search" />
 
 </AnchorPane>

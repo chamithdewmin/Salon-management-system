@@ -11,7 +11,7 @@ public class MenuController {
     public Button taskBtn;
     public Button smsBtn;
     public Button customerBtn;
-    public Button inevtroyBtn;
+    public Button staffBtn;
     @FXML
     private Button dashboardButton;
 
@@ -29,6 +29,6 @@ public class MenuController {
         taskBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.TASK));
         smsBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.SMS));
         customerBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.CUSTOMER));
-        inevtroyBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.INVENTORY));
+        staffBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.STAFF));
     }
 }

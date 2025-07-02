@@ -64,7 +64,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button fx:id="inevtroyBtn" layoutX="24.0" layoutY="490.0" prefWidth="200.0" text="Inventroy">
+   <Button fx:id="staffBtn" layoutX="24.0" layoutY="490.0" prefWidth="200.0" text="Staff">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -73,6 +73,6 @@
          </ImageView>
       </graphic>
    </Button>
-   <Label layoutX="41.0" layoutY="101.0" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE" />
+   <Label layoutX="41.0" layoutY="101.0" stylesheets="@../CSS/Menu.css" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE" />
 
 </AnchorPane>

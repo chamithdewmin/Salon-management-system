@@ -61,6 +61,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -75,12 +76,19 @@
             <version>2.11.0</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.controlsfx</groupId>-->
+<!--            <artifactId>controlsfx</artifactId>-->
+<!--            <version>11.1.2</version>-->
+<!--        </dependency>-->
+
         <!-- ✅ Optional: Java AWT graphics (used internally for charts) -->
         <dependency>
             <groupId>org.swinglabs</groupId>
             <artifactId>swingx</artifactId>
             <version>1.6.1</version>
         </dependency>
+
     </dependencies>
 
     <build>

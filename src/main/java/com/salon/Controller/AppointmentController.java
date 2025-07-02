@@ -3,11 +3,15 @@ package com.salon.Controller;
 import com.salon.Model.*;
 import com.salon.Model.Appointment.Appointment;
 import com.salon.Model.Appointment.AppointmentDAO;
+import com.salon.Model.Customers.Customer;
+import com.salon.Model.Customers.CustomerDAO;
 import com.salon.Model.Services.Service;
 import com.salon.Model.Services.ServiceDAO;
 import com.salon.Utils.CustomAlert;
 import com.salon.Utils.SmsService;
+import com.salon.Utils.ValidatorUtil;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -15,10 +19,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Time;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.*;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -26,6 +28,9 @@ import java.util.concurrent.TimeUnit;
 public class AppointmentController {
 
     public Button updateButton;
+    public ComboBox<String> dateCombobox;
+    public TextField serchClinetNameTxt;
+
     @FXML private TextField clientName;
     @FXML private TextField clientContact;
     @FXML private DatePicker appointmentDate;
@@ -44,10 +49,12 @@ public class AppointmentController {
     @FXML private TableColumn<Appointment, String> colStaff;
 
     private int selectedAppointmentId = -1;
+    private final ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    private final Map<String, Customer> customerMap = new HashMap<>();
 
     @FXML
     public void initialize() {
-        loadServicesIntoComboBox(); // 🔄 Load from DB
+        loadServicesIntoComboBox();
         ampmCombo.setItems(FXCollections.observableArrayList("AM", "PM"));
 
         for (int i = 1; i <= 12; i++) hourCombo.getItems().add(i);
@@ -77,14 +84,44 @@ public class AppointmentController {
                 hourCombo.setValue(hour);
                 minuteCombo.setValue(minute);
                 ampmCombo.setValue(ampm);
-
                 serviceTypeCombo.setValue(selected.getServiceType());
                 staffNameField.setText(selected.getStaffName());
             }
         });
 
+        serchClinetNameTxt.textProperty().addListener((obs, oldText, newText) -> filterAppointments());
+        dateCombobox.valueProperty().addListener((obs, oldVal, newVal) -> filterAppointments());
+
+        loadCustomerNames();
         loadAppointments();
         startReminderScheduler();
+    }
+
+    private void loadCustomerNames() {
+        try {
+            Connection conn = DatabaseConnection.connect();
+            CustomerDAO customerDAO = new CustomerDAO(conn);
+            List<Customer> customers = customerDAO.getAllCustomers();
+
+            for (Customer c : customers) {
+                customerMap.put(c.getFullName(), c);
+            }
+
+            clientName.textProperty().addListener((obs, oldVal, newVal) -> {
+                Customer selected = customerMap.get(newVal);
+                if (selected != null) {
+                    clientContact.setText(selected.getPhone());
+                    clientContact.setDisable(true);
+                } else {
+                    clientContact.clear();
+                    clientContact.setDisable(false);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            CustomAlert.showAlert(Alert.AlertType.ERROR, "Customer Error", "Failed to load customer list.");
+        }
     }
 
     private void loadServicesIntoComboBox() {
@@ -116,6 +153,11 @@ public class AppointmentController {
                 return;
             }
 
+            if (!ValidatorUtil.isValidPhoneNumber(clientContact.getText().trim())) {
+                CustomAlert.showAlert(Alert.AlertType.WARNING, "Invalid Phone", "Enter a valid Sri Lankan phone number.");
+                return;
+            }
+
             int hour = hourCombo.getValue();
             int minute = minuteCombo.getValue();
             String ampm = ampmCombo.getValue();
@@ -140,9 +182,11 @@ public class AppointmentController {
                 String message = String.format("Hi %s, your appointment is confirmed for %s at %02d:%02d %s. Thanks for choosing Salon Magical!",
                         appointment.getClientName(),
                         appointment.getDate(),
-                        hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue()
-                );
-                SmsService.sendSms(appointment.getClientContact(), message);
+                        hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue());
+
+                if (SmsService.sendSms(appointment.getClientContact(), message)) {
+                    CustomAlert.showSuccess("SMS confirmation sent successfully!");
+                }
 
             } else {
                 appointment.setId(selectedAppointmentId);
@@ -152,9 +196,11 @@ public class AppointmentController {
                 String message = String.format("Hi %s, your appointment has been updated to %s at %02d:%02d %s. - Salon Magical",
                         appointment.getClientName(),
                         appointment.getDate(),
-                        hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue()
-                );
-                SmsService.sendSms(appointment.getClientContact(), message);
+                        hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue());
+
+                if (SmsService.sendSms(appointment.getClientContact(), message)) {
+                    CustomAlert.showSuccess("SMS update sent successfully!");
+                }
 
                 selectedAppointmentId = -1;
             }
@@ -183,9 +229,11 @@ public class AppointmentController {
             String message = String.format("Hi %s, your appointment scheduled for %s at %s has been cancelled. - Salon Magical",
                     selected.getClientName(),
                     selected.getDate().toString(),
-                    selected.getTime().toString().substring(0, 5)
-            );
-            SmsService.sendSms(selected.getClientContact(), message);
+                    selected.getTime().toString().substring(0, 5));
+
+            if (SmsService.sendSms(selected.getClientContact(), message)) {
+                CustomAlert.showSuccess("SMS cancellation sent successfully!");
+            }
 
             loadAppointments();
             clearFields();
@@ -201,7 +249,19 @@ public class AppointmentController {
 
     @FXML
     public void handleRefresh() {
+        clearFields();
+        loadServicesIntoComboBox();
+        loadCustomerNames();
         loadAppointments();
+
+        ampmCombo.setItems(FXCollections.observableArrayList("AM", "PM"));
+        hourCombo.getItems().clear();
+        for (int i = 1; i <= 12; i++) hourCombo.getItems().add(i);
+        minuteCombo.getItems().clear();
+        for (int i = 0; i < 60; i += 15) minuteCombo.getItems().add(i);
+
+        serchClinetNameTxt.clear();
+        dateCombobox.setValue("All");
     }
 
     private void clearFields() {
@@ -214,19 +274,66 @@ public class AppointmentController {
         serviceTypeCombo.setValue(null);
         staffNameField.clear();
         selectedAppointmentId = -1;
+        clientContact.setDisable(false);
     }
 
     private void loadAppointments() {
         try {
             AppointmentDAO.deleteExpiredAppointments();
             List<Appointment> appointments = AppointmentDAO.getAllAppointments();
-            appointmentTable.getItems().setAll(appointments);
+            allAppointments.setAll(appointments);
+            appointmentTable.setItems(allAppointments);
+
+            Set<String> uniqueDates = new TreeSet<>();
+            uniqueDates.add("All");
+            uniqueDates.add("Today");
+            uniqueDates.add("This Week");
+
+            for (Appointment a : appointments) {
+                uniqueDates.add(a.getDate().toString());
+            }
+
+            dateCombobox.setItems(FXCollections.observableArrayList(uniqueDates));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // 🔔 Reminder Scheduler
+    private void filterAppointments() {
+        String nameFilter = serchClinetNameTxt.getText().trim().toLowerCase();
+        String selectedDate = dateCombobox.getValue();
+
+        ObservableList<Appointment> filtered = FXCollections.observableArrayList();
+        LocalDate today = LocalDate.now();
+        LocalDate weekStart = today.with(DayOfWeek.MONDAY);
+        LocalDate weekEnd = weekStart.plusDays(6);
+
+        for (Appointment appt : allAppointments) {
+            boolean matchesName = appt.getClientName().toLowerCase().contains(nameFilter);
+            boolean matchesDate = true;
+
+            if (selectedDate != null && !selectedDate.equals("All")) {
+                LocalDate apptDate = appt.getDate().toLocalDate();
+                switch (selectedDate) {
+                    case "Today":
+                        matchesDate = apptDate.equals(today);
+                        break;
+                    case "This Week":
+                        matchesDate = !apptDate.isBefore(weekStart) && !apptDate.isAfter(weekEnd);
+                        break;
+                    default:
+                        matchesDate = apptDate.toString().equals(selectedDate);
+                }
+            }
+
+            if (matchesName && matchesDate) {
+                filtered.add(appt);
+            }
+        }
+
+        appointmentTable.setItems(filtered);
+    }
+
     private void startReminderScheduler() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(() -> {

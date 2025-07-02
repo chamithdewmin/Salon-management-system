@@ -1,4 +1,4 @@
-package com.salon.Model.Inventory;
+package com.salon.Model.Staff;
 
 import com.salon.Model.DatabaseConnection;
 import javafx.collections.FXCollections;
@@ -6,26 +6,28 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
-public class InventoryDAO {
+public class StaffDAO {
 
     private final Connection connection;
 
-    public InventoryDAO() {
+    public StaffDAO() {
         connection = DatabaseConnection.connect();
     }
 
-    public ObservableList<InventoryItem> getAllItems() {
-        ObservableList<InventoryItem> list = FXCollections.observableArrayList();
-        String query = "SELECT * FROM inventory";
+    public ObservableList<Staff> getAllStaff() {
+        ObservableList<Staff> list = FXCollections.observableArrayList();
+        String query = "SELECT * FROM staff"; // Ensure this table exists
 
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
-                InventoryItem item = new InventoryItem(
+                Staff staff = new Staff(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getInt("quantity")
+                        rs.getString("phone"),
+                        rs.getString("nic"),
+                        rs.getString("address")
                 );
-                list.add(item);
+                list.add(staff);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,12 +36,14 @@ public class InventoryDAO {
         return list;
     }
 
-    public boolean addItem(InventoryItem item) {
-        String sql = "INSERT INTO inventory (name, quantity) VALUES (?, ?)";
+    public boolean addStaff(Staff staff) {
+        String sql = "INSERT INTO staff (name, phone, nic, address) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, item.getName());
-            ps.setInt(2, item.getQuantity());
+            ps.setString(1, staff.getName());
+            ps.setString(2, staff.getPhone());
+            ps.setString(3, staff.getNic());
+            ps.setString(4, staff.getAddress());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -49,13 +53,15 @@ public class InventoryDAO {
         return false;
     }
 
-    public boolean updateItem(InventoryItem item) {
-        String sql = "UPDATE inventory SET name = ?, quantity = ? WHERE id = ?";
+    public boolean updateStaff(Staff staff) {
+        String sql = "UPDATE staff SET name = ?, phone = ?, nic = ?, address = ? WHERE id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, item.getName());
-            ps.setInt(2, item.getQuantity());
-            ps.setInt(4, item.getId());
+            ps.setString(1, staff.getName());
+            ps.setString(2, staff.getPhone());
+            ps.setString(3, staff.getNic());
+            ps.setString(4, staff.getAddress());
+            ps.setInt(5, staff.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -65,8 +71,8 @@ public class InventoryDAO {
         return false;
     }
 
-    public boolean deleteItem(int id) {
-        String sql = "DELETE FROM inventory WHERE id = ?";
+    public boolean deleteStaff(int id) {
+        String sql = "DELETE FROM staff WHERE id = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);

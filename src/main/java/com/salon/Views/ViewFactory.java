@@ -18,7 +18,7 @@ public class ViewFactory {
     private AnchorPane taskView;
     private AnchorPane smsView;
     private AnchorPane customerView;
-    private AnchorPane inventoryView;
+    private AnchorPane staffView;
 
     public ObjectProperty<ViewOption> getMenuItem() {
         return menuItem;
@@ -57,15 +57,15 @@ public class ViewFactory {
         return settingView;
     }
 
-    public AnchorPane showInventory() {
-        if (inventoryView == null) {
+    public AnchorPane showStaff() {
+        if (staffView == null) {
             try {
-                inventoryView = new FXMLLoader(getClass().getResource("/Xaml/inventory.fxml")).load();
+                staffView = new FXMLLoader(getClass().getResource("/Xaml/Staff.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return inventoryView;
+        return staffView;
     }
 
     public AnchorPane showTask() {

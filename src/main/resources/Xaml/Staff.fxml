@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.StaffController">
+
+    <!-- Staff Table -->
+    <TableView fx:id="staffTable" layoutX="533.0" layoutY="106.0" prefHeight="690.0" prefWidth="917.0">
+        <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="230.0" text="Name" />
+            <TableColumn fx:id="phoneColumn" prefWidth="218.0" text="Phone" />
+            <TableColumn fx:id="nicColumn" prefWidth="193.0" text="NIC" />
+            <TableColumn fx:id="addressColumn" prefWidth="274.0" text="Address" />
+        </columns>
+    </TableView>
+
+    <Label layoutX="61.0" layoutY="51.0" styleClass="task-title" text="Staff Management" />
+
+    <TextField fx:id="nameField" layoutX="148.0" layoutY="240.0" prefHeight="52.0" prefWidth="285.0" promptText="Name :" />
+    <TextField fx:id="phoneField" layoutX="148.0" layoutY="319.0" prefHeight="52.0" prefWidth="285.0" promptText="Phone Number" />
+    <TextField fx:id="nicField" layoutX="144.0" layoutY="399.0" prefHeight="52.0" prefWidth="285.0" promptText="NIC :" />
+    <TextField fx:id="addressField" layoutX="144.0" layoutY="482.0" prefHeight="52.0" prefWidth="285.0" promptText="Address :" />
+
+    <Button layoutX="144.0" layoutY="578.0" onAction="#handleAddStaff" prefHeight="52.0" prefWidth="285.0" text="Add" />
+    <Button layoutX="144.0" layoutY="651.0" onAction="#handleUpdateStaff" prefHeight="52.0" prefWidth="132.0" text="Update" />
+    <Button layoutX="299.0" layoutY="651.0" onAction="#handleDeleteStaff" prefHeight="52.0" prefWidth="132.0" text="Delete" />
+    <Button fx:id="refreshBtn" layoutX="1318.0" layoutY="25.0" onAction="#handleRefresh" prefHeight="52.0" prefWidth="132.0" text="Refresh" />
+</AnchorPane>

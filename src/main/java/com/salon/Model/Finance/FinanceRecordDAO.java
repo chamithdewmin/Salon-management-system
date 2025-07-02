@@ -30,12 +30,13 @@ public class FinanceRecordDAO {
     }
 
     public boolean insertIncome(FinanceRecord record) {
-        String sql = "INSERT INTO income (date, description, customerName, amount) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO income (date, description, customerName, staffName, amount) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, record.getDate());
             stmt.setString(2, record.getDescription());
             stmt.setString(3, record.getCustomerName());
-            stmt.setDouble(4, record.getAmount());
+            stmt.setString(4, record.getStaffName());
+            stmt.setDouble(5, record.getAmount());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

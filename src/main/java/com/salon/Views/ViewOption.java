@@ -7,5 +7,5 @@ public enum ViewOption {
     TASK,
     SMS,
     CUSTOMER,
-    INVENTORY
+    STAFF
 }
