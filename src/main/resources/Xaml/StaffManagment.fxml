@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1600.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.StaffManagmentController">
+   <children>
+      <ComboBox fx:id="staffName" layoutX="105.0" layoutY="111.0" prefHeight="63.0" prefWidth="261.0" promptText="Staff Name :" />
+      <ComboBox fx:id="Date" layoutX="416.0" layoutY="111.0" prefHeight="63.0" prefWidth="261.0" promptText="Daily or Montly" />
+      <Label fx:id="TotalIncome" layoutX="312.0" layoutY="291.0" prefHeight="63.0" prefWidth="109.0" text="Label" />
+   </children>
+</AnchorPane>

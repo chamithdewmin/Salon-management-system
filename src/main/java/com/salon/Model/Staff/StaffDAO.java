@@ -10,13 +10,14 @@ public class StaffDAO {
 
     private final Connection connection;
 
-    public StaffDAO() {
+    public StaffDAO(Connection conn) {
         connection = DatabaseConnection.connect();
     }
 
+    // 🔹 Fetch all staff (full object list)
     public ObservableList<Staff> getAllStaff() {
         ObservableList<Staff> list = FXCollections.observableArrayList();
-        String query = "SELECT * FROM staff"; // Ensure this table exists
+        String query = "SELECT * FROM staff";
 
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -36,6 +37,23 @@ public class StaffDAO {
         return list;
     }
 
+    // ✅ New: Fetch only staff names (for ComboBox)
+    public ObservableList<String> getAllStaffNames() {
+        ObservableList<String> names = FXCollections.observableArrayList();
+        String sql = "SELECT name FROM staff ORDER BY name ASC";
+
+        try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                names.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return names;
+    }
+
+    // 🔹 Add new staff member
     public boolean addStaff(Staff staff) {
         String sql = "INSERT INTO staff (name, phone, nic, address) VALUES (?, ?, ?, ?)";
 
@@ -53,6 +71,7 @@ public class StaffDAO {
         return false;
     }
 
+    // 🔹 Update staff details
     public boolean updateStaff(Staff staff) {
         String sql = "UPDATE staff SET name = ?, phone = ?, nic = ?, address = ? WHERE id = ?";
 
@@ -71,6 +90,7 @@ public class StaffDAO {
         return false;
     }
 
+    // 🔹 Delete staff by ID
     public boolean deleteStaff(int id) {
         String sql = "DELETE FROM staff WHERE id = ?";
 

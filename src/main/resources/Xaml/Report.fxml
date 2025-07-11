@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.ReportController">
 
@@ -26,8 +33,7 @@
 
     <!-- Filters -->
     <ComboBox fx:id="typeComboBox" layoutX="63.0" layoutY="293.0" prefWidth="200" promptText="Select Type" />
-    <ComboBox fx:id="filterComboBox" layoutX="294.0" layoutY="293.0" prefWidth="150" promptText="Filter By" />
-    <DatePicker fx:id="filterDatePicker" layoutX="480.0" layoutY="288.0" prefWidth="180.0" />
+    <DatePicker fx:id="filterDatePicker" layoutX="285.0" layoutY="288.0" prefWidth="180.0" />
 
     <!-- TableView -->
     <TableView fx:id="reportTable" layoutX="63.0" layoutY="367.0" prefHeight="500" prefWidth="1440">
@@ -42,12 +48,7 @@
     </TableView>
 
     <!-- Buttons -->
-    <Button fx:id="downloadButton" layoutX="61.0" layoutY="882.0" prefHeight="45.0" prefWidth="218.0"
-            style="-fx-background-color: #00FFB0; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;"
-            text="Download PDF Report" />
-    <Button fx:id="refreshButton" layoutX="1341.0" layoutY="37.0" onAction="#handleRefresh"
-            prefHeight="45.0" prefWidth="150.0"
-            style="-fx-background-color: #ffffff; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;"
-            text="Refresh" />
+    <Button fx:id="downloadButton" layoutX="61.0" layoutY="882.0" prefHeight="45.0" prefWidth="218.0" style="-fx-background-color: #00FFB0; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Download PDF Report" />
+    <Button fx:id="refreshButton" layoutX="1341.0" layoutY="37.0" onAction="#handleRefresh" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Refresh" />
 
 </AnchorPane>

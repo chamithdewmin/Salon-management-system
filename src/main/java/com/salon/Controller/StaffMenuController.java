@@ -5,15 +5,13 @@ import com.salon.Views.ViewOption;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class MenuController {
+public class StaffMenuController {
 
 
-    public Button taskBtn;
     public Button smsBtn;
     public Button customerBtn;
     public Button staffBtn;
     public Button logoutBtn;
-    public Button addExpaenceBtn;
     @FXML
     private Button dashboardButton;
 
@@ -21,19 +19,11 @@ public class MenuController {
     private Button AddRateButton;
 
     @FXML
-    private Button SettingButton;
-
-    @FXML
     private void initialize() {
         dashboardButton.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.DASHBOARD));
         AddRateButton.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.ADD_RATE));
-        SettingButton.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.REPORT));
-        taskBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.TASK));
         smsBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.SMS));
-        customerBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.CUSTOMER));
         staffBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.STAFF));
         logoutBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.LOGOUT));
-        addExpaenceBtn.setOnAction(e -> Model.getInstance().getViewFactory().getMenuItem().set(ViewOption.EXPENSES));
-
     }
 }

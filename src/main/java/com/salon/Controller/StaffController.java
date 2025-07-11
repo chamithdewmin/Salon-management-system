@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
+import java.sql.Connection;
+
 public class StaffController {
 
     public Button refreshBtn;
@@ -24,7 +26,8 @@ public class StaffController {
     @FXML private TableColumn<Staff, String> addressColumn;
 
     private Staff selectedStaff;
-    private final StaffDAO staffDAO = new StaffDAO();
+    private Connection conn;
+    private final StaffDAO staffDAO = new StaffDAO(conn);
 
     @FXML
     public void initialize() {

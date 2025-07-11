@@ -19,6 +19,7 @@ public class ViewFactory {
     private AnchorPane smsView;
     private AnchorPane customerView;
     private AnchorPane staffView;
+    private AnchorPane ExpensesView;
 
     public ObjectProperty<ViewOption> getMenuItem() {
         return menuItem;
@@ -27,7 +28,7 @@ public class ViewFactory {
     public AnchorPane showDashboardView() {
         if (dashboardView == null) {
             try {
-                dashboardView = new FXMLLoader(getClass().getResource("/Xaml/Dashboard.fxml")).load();
+                dashboardView = new FXMLLoader(getClass().getResource("/Xaml/Cashier.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -60,7 +61,7 @@ public class ViewFactory {
     public AnchorPane showStaff() {
         if (staffView == null) {
             try {
-                staffView = new FXMLLoader(getClass().getResource("/Xaml/Staff.fxml")).load();
+                staffView = new FXMLLoader(getClass().getResource("/Xaml/StaffManagment.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -79,10 +80,21 @@ public class ViewFactory {
         return taskView;
     }
 
+    public AnchorPane showExpenses() {
+        if (ExpensesView == null) {
+            try {
+                ExpensesView = new FXMLLoader(getClass().getResource("/Xaml/AddExpenses.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return ExpensesView;
+    }
+
     public AnchorPane customer() {
         if (customerView == null) {
             try {
-                customerView = new FXMLLoader(getClass().getResource("/Xaml/customerManager.fxml")).load();
+                customerView = new FXMLLoader(getClass().getResource("/Xaml/LoyaltyCustomers.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -126,6 +138,28 @@ public class ViewFactory {
     public void fullWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Xaml/MenuFull.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage stage = new Stage();
+
+            // ✅ Set icon image - ensure logo.png is in /resources/images/
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
+
+            stage.setScene(scene);
+            stage.setTitle("Salon Magical");
+            stage.setResizable(true);
+            stage.setMaximized(true); // use for get full screen when open the system
+//            stage.setFullScreen(true);  // use for get full screen not task bar and no close buttons
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void StafffullWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Xaml/StaffMenuFull.fxml"));
             Scene scene = new Scene(loader.load());
 
             Stage stage = new Stage();

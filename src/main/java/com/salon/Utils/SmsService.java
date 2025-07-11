@@ -8,9 +8,9 @@ import java.nio.charset.StandardCharsets;
 
 public class SmsService {
 
-    private static final String USER_ID = "334";
-    private static final String API_KEY = "b99a552d-f5da-47c4-9fae-5fb3db8cf090";
-    private static final String SENDER_ID = "SMSlenzDEMO";
+    private static final String USER_ID = "75";
+    private static final String API_KEY = "13ca3f2f-c58e-45c4-b985-b41483e5a81c";
+    private static final String SENDER_ID = "MAGICAL";
 
     public static boolean sendSms(String number, String message) {
         try {

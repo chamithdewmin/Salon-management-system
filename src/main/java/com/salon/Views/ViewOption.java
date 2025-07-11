@@ -7,5 +7,7 @@ public enum ViewOption {
     TASK,
     SMS,
     CUSTOMER,
-    STAFF
+    STAFF,
+    LOGOUT,
+    EXPENSES
 }

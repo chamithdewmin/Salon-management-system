@@ -1,8 +1,8 @@
 package com.salon.Controller;
 
 import com.salon.Model.DatabaseConnection;
-import com.salon.Model.Finance.FinanceRecord;
-import com.salon.Model.Finance.FinanceRecordDAO;
+import com.salon.Model.Income.Income;
+import com.salon.Model.Income.IncomeDAO;
 import com.salon.Utils.CustomAlert;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,10 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class ReportController {
@@ -24,39 +21,36 @@ public class ReportController {
     @FXML private Label totalSavingLabel;
 
     @FXML private ComboBox<String> typeComboBox;
-    @FXML private ComboBox<String> filterComboBox;
     @FXML private DatePicker filterDatePicker;
 
-    @FXML private TableView<FinanceRecord> reportTable;
-    @FXML private TableColumn<FinanceRecord, String> dateColumn;
-    @FXML private TableColumn<FinanceRecord, String> customerColumn;
-    @FXML private TableColumn<FinanceRecord, String> serviceColumn;
-    @FXML private TableColumn<FinanceRecord, String> staffColumn;
-    @FXML private TableColumn<FinanceRecord, String> visitColumn;
-    @FXML private TableColumn<FinanceRecord, Double> amountColumn;
+    @FXML private TableView<Income> reportTable;
+    @FXML private TableColumn<Income, String> dateColumn;
+    @FXML private TableColumn<Income, String> customerColumn;
+    @FXML private TableColumn<Income, String> serviceColumn;
+    @FXML private TableColumn<Income, String> staffColumn;
+    @FXML private TableColumn<Income, String> visitColumn;
+    @FXML private TableColumn<Income, Double> amountColumn;
 
     @FXML private Button downloadButton;
     @FXML public Button refreshButton;
 
-    private FinanceRecordDAO financeDAO;
+    private IncomeDAO financeDAO;
+    private Connection conn;
 
     @FXML
     public void initialize() {
-        Connection conn = DatabaseConnection.connect();
+        conn = DatabaseConnection.connect();
         if (conn == null) {
-            CustomAlert.showAlert("Database Error", "Failed to connect to the database.");
+            CustomAlert.showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to connect to the database.");
             return;
         }
 
-        financeDAO = new FinanceRecordDAO(conn);
+        financeDAO = new IncomeDAO(conn);
 
         setupTableColumns();
 
-        typeComboBox.setItems(FXCollections.observableArrayList("Income", "Expense", "Loyalty Customers"));
-        filterComboBox.setItems(FXCollections.observableArrayList("Daily", "Monthly"));
-
+        typeComboBox.setItems(FXCollections.observableArrayList("Income", "Expense"));
         typeComboBox.setOnAction(e -> reloadData());
-        filterComboBox.setOnAction(e -> reloadData());
         filterDatePicker.setOnAction(e -> reloadData());
 
         refreshUI();
@@ -74,102 +68,69 @@ public class ReportController {
 
     private void reloadData() {
         String selectedType = typeComboBox.getValue();
-        String filterType = filterComboBox.getValue();
-        LocalDate selectedDate = filterDatePicker.getValue();
+        if (selectedType == null) return;
 
-        if (selectedType == null || (!"Loyalty Customers".equals(selectedType) && (filterType == null || selectedDate == null))) {
-            reportTable.getItems().clear();
-            return;
-        }
-
-        if ("Loyalty Customers".equals(selectedType)) {
-            loadLoyaltyCustomers();
-        } else {
-            loadFinanceData(selectedType);
-        }
+        loadFinanceData(selectedType);
     }
 
     private void loadFinanceData(String type) {
-        ObservableList<FinanceRecord> data = FXCollections.observableArrayList();
+        ObservableList<Income> data = FXCollections.observableArrayList();
+        LocalDate selectedDate = filterDatePicker.getValue();
 
-        boolean isIncome = "Income".equalsIgnoreCase(type);
-        String sql;
-
-        if ("Monthly".equals(filterComboBox.getValue())) {
-            sql = isIncome
-                    ? "SELECT date, customerName, description, staffName, amount FROM income WHERE MONTH(date) = ? AND YEAR(date) = ?"
-                    : "SELECT date, description, amount FROM expense WHERE MONTH(date) = ? AND YEAR(date) = ?";
-        } else {
-            sql = isIncome
-                    ? "SELECT date, customerName, description, staffName, amount FROM income WHERE date = ?"
-                    : "SELECT date, description, amount FROM expense WHERE date = ?";
-        }
-
-        try (PreparedStatement stmt = financeDAO.conn.prepareStatement(sql)) {
-            LocalDate selectedDate = filterDatePicker.getValue();
-            if ("Monthly".equals(filterComboBox.getValue())) {
-                stmt.setInt(1, selectedDate.getMonthValue());
-                stmt.setInt(2, selectedDate.getYear());
-            } else {
-                stmt.setDate(1, java.sql.Date.valueOf(selectedDate));
-            }
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String date = rs.getString("date");
-                String desc = rs.getString("description");
-                double amt = rs.getDouble("amount");
-
-                if (isIncome) {
-                    String customer = rs.getString("customerName");
-                    String staff = rs.getString("staffName");
-                    data.add(new FinanceRecord(date, desc, amt, customer, staff, "-"));
-                } else {
-                    data.add(new FinanceRecord(date, desc, amt, "-", "-", "-"));
+        try {
+            if ("Income".equalsIgnoreCase(type)) {
+                String sql = (selectedDate == null)
+                        ? "SELECT date, customer_name, service, recipient, amount FROM income"
+                        : "SELECT date, customer_name, service, recipient, amount FROM income WHERE date = ?";
+                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    if (selectedDate != null) stmt.setDate(1, Date.valueOf(selectedDate));
+                    ResultSet rs = stmt.executeQuery();
+                    while (rs.next()) {
+                        data.add(new Income(
+                                rs.getString("date"),
+                                rs.getString("service"),          // used as description
+                                rs.getDouble("amount"),
+                                rs.getString("customer_name"),
+                                rs.getString("recipient"),        // used as staff
+                                "-"                               // placeholder for visit count
+                        ));
+                    }
+                }
+            } else if ("Expense".equalsIgnoreCase(type)) {
+                String sql = (selectedDate == null)
+                        ? "SELECT date, description, category, amount FROM expenses"
+                        : "SELECT date, description, category, amount FROM expenses WHERE date = ?";
+                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    if (selectedDate != null) stmt.setDate(1, Date.valueOf(selectedDate));
+                    ResultSet rs = stmt.executeQuery();
+                    while (rs.next()) {
+                        data.add(new Income(
+                                rs.getString("date"),
+                                rs.getString("description") + " (" + rs.getString("category") + ")",
+                                rs.getDouble("amount"),
+                                "-", "-", "-"
+                        ));
+                    }
                 }
             }
 
             reportTable.setItems(data);
+
         } catch (SQLException e) {
             e.printStackTrace();
-            CustomAlert.showAlert("SQL Error", "Failed to load " + type + " data.");
-        }
-    }
-
-    private void loadLoyaltyCustomers() {
-        ObservableList<FinanceRecord> data = FXCollections.observableArrayList();
-        String sql = "SELECT customerName, COUNT(DISTINCT date) AS visits, " +
-                "SUM(LENGTH(description) - LENGTH(REPLACE(description, ',', '')) + 1) AS serviceCount, " +
-                "SUM(amount) AS total, staffName " +
-                "FROM income WHERE description IS NOT NULL GROUP BY customerName, staffName";
-
-        try (PreparedStatement stmt = financeDAO.conn.prepareStatement(sql)) {
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String customerName = rs.getString("customerName");
-                String staffName = rs.getString("staffName");
-                String visits = String.valueOf(rs.getInt("visits"));
-                String serviceCount = String.valueOf(rs.getInt("serviceCount"));
-                double total = rs.getDouble("total");
-
-                data.add(new FinanceRecord("-", serviceCount, total, customerName, staffName, visits));
-            }
-            reportTable.setItems(data);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            CustomAlert.showAlert("SQL Error", "Failed to load loyalty customer data.");
+            CustomAlert.showAlert(Alert.AlertType.ERROR, "SQL Error", "Failed to load " + type + " data.");
         }
     }
 
     private void loadSummary() {
         try {
-            FinanceRecord summary = financeDAO.getFinanceSummary();
+            Income summary = financeDAO.getFinanceSummary();
             totalIncomeLabel.setText("Rs. " + String.format("%.2f", summary.getIncome()));
             totalExpenseLabel.setText("Rs. " + String.format("%.2f", summary.getExpenses()));
             totalSavingLabel.setText("Rs. " + String.format("%.2f", summary.getSaved()));
         } catch (SQLException e) {
             e.printStackTrace();
-            CustomAlert.showAlert("Load Error", "Failed to load summary data.");
+            CustomAlert.showAlert(Alert.AlertType.ERROR, "Load Error", "Failed to load summary data.");
         }
     }
 
@@ -181,7 +142,6 @@ public class ReportController {
 
     private void refreshUI() {
         typeComboBox.getSelectionModel().clearSelection();
-        filterComboBox.getSelectionModel().clearSelection();
         filterDatePicker.setValue(null);
         reportTable.getItems().clear();
     }

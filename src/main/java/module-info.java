@@ -21,5 +21,5 @@ module com.savingRate.SavingRate {
     opens com.salon.Model.Customers to javafx.base;
     opens com.salon.Model.Staff to javafx.base;
     opens com.salon.Model.Services to javafx.base;
-    opens com.salon.Model.Finance to javafx.base;
+    opens com.salon.Model.Income to javafx.base;
 }

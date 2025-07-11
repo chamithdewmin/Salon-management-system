@@ -11,7 +11,8 @@ public class Appointment {
     private Time time;
     private String serviceType;
     private String staffName;
-    private boolean reminderSent; // ✅ New field
+    private String appointmentType;  // ✅ New field
+    private boolean reminderSent;
 
     // Getters & Setters
     public int getId() { return id; }
@@ -35,6 +36,9 @@ public class Appointment {
     public String getStaffName() { return staffName; }
     public void setStaffName(String staffName) { this.staffName = staffName; }
 
-    public boolean isReminderSent() { return reminderSent; }  // ✅ New getter
-    public void setReminderSent(boolean reminderSent) { this.reminderSent = reminderSent; } // ✅ New setter
+    public String getAppointmentType() { return appointmentType; }  // ✅
+    public void setAppointmentType(String appointmentType) { this.appointmentType = appointmentType; }
+
+    public boolean isReminderSent() { return reminderSent; }
+    public void setReminderSent(boolean reminderSent) { this.reminderSent = reminderSent; }
 }

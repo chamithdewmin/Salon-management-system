@@ -12,7 +12,7 @@ public class AppointmentDAO {
 
     // Insert a new appointment
     public static void insertAppointment(Appointment appointment) throws Exception {
-        String sql = "INSERT INTO appointments (client_name, client_contact, appointment_date, appointment_time, service_type, staff_name, reminder_sent) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO appointments (client_name, client_contact, appointment_date, appointment_time, service_type, staff_name, appointment_type, reminder_sent) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -23,7 +23,8 @@ public class AppointmentDAO {
             stmt.setTime(4, appointment.getTime());
             stmt.setString(5, appointment.getServiceType());
             stmt.setString(6, appointment.getStaffName());
-            stmt.setBoolean(7, appointment.isReminderSent()); // new field
+            stmt.setString(7, appointment.getAppointmentType());  // ✅
+            stmt.setBoolean(8, appointment.isReminderSent());
             stmt.executeUpdate();
         }
     }
@@ -38,7 +39,7 @@ public class AppointmentDAO {
         }
     }
 
-    // Fetch all appointments (with reminder_sent)
+    // Fetch all appointments
     public static List<Appointment> getAllAppointments() throws Exception {
         List<Appointment> list = new ArrayList<>();
         String sql = "SELECT * FROM appointments ORDER BY appointment_date, appointment_time";
@@ -56,7 +57,8 @@ public class AppointmentDAO {
                 a.setTime(rs.getTime("appointment_time"));
                 a.setServiceType(rs.getString("service_type"));
                 a.setStaffName(rs.getString("staff_name"));
-                a.setReminderSent(rs.getBoolean("reminder_sent")); // new
+                a.setAppointmentType(rs.getString("appointment_type")); // ✅
+                a.setReminderSent(rs.getBoolean("reminder_sent"));
                 list.add(a);
             }
         }
@@ -76,7 +78,7 @@ public class AppointmentDAO {
 
     // Update appointment
     public static void updateAppointment(Appointment appointment) throws Exception {
-        String sql = "UPDATE appointments SET client_name=?, client_contact=?, appointment_date=?, appointment_time=?, service_type=?, staff_name=?, reminder_sent=? WHERE id=?";
+        String sql = "UPDATE appointments SET client_name=?, client_contact=?, appointment_date=?, appointment_time=?, service_type=?, staff_name=?, appointment_type=?, reminder_sent=? WHERE id=?";
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -86,14 +88,15 @@ public class AppointmentDAO {
             stmt.setTime(4, appointment.getTime());
             stmt.setString(5, appointment.getServiceType());
             stmt.setString(6, appointment.getStaffName());
-            stmt.setBoolean(7, appointment.isReminderSent());
-            stmt.setInt(8, appointment.getId());
+            stmt.setString(7, appointment.getAppointmentType()); // ✅
+            stmt.setBoolean(8, appointment.isReminderSent());
+            stmt.setInt(9, appointment.getId());
 
             stmt.executeUpdate();
         }
     }
 
-    // ✅ Mark reminder as sent
+    // Mark reminder as sent
     public static void markReminderSent(int id) throws Exception {
         String sql = "UPDATE appointments SET reminder_sent = 1 WHERE id = ?";
         try (Connection conn = DatabaseConnection.connect();

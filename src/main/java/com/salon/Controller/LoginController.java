@@ -11,16 +11,16 @@ import javafx.scene.layout.AnchorPane;
 public class LoginController {
 
     @FXML
-    public TextField usernaemTxt;
+    private TextField usernaemTxt;
 
     @FXML
-    public PasswordField PasswordTxt;
+    private PasswordField PasswordTxt;
 
     @FXML
-    public Button LoginBtn;
+    private Button LoginBtn;
 
     @FXML
-    public CheckBox showPassword;
+    private CheckBox showPassword;
 
     private TextField visiblePassword;
 
@@ -30,7 +30,6 @@ public class LoginController {
 
         LoginBtn.setOnAction(event -> handleLogin());
 
-        // Handle Enter key for login
         usernaemTxt.setOnKeyPressed(this::handleEnterKey);
         PasswordTxt.setOnKeyPressed(this::handleEnterKey);
         visiblePassword.setOnKeyPressed(this::handleEnterKey);
@@ -51,19 +50,21 @@ public class LoginController {
             return;
         }
 
-        if (username.equals("user") && password.equals("123")) {
-            // Open main window
+        if (username.equals("admin") && password.equals("123")) {
             Model.getInstance().getViewFactory().fullWindow();
-            // Close login window
+            LoginBtn.getScene().getWindow().hide();
+        } else if (username.equals("user") && password.equals("123")) {
+            Model.getInstance().getViewFactory().StafffullWindow();
             LoginBtn.getScene().getWindow().hide();
         } else {
             CustomAlert.showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password.");
-            clearIncomeFields();
+            clearLoginFields();
         }
     }
 
-    private void clearIncomeFields() {
+    private void clearLoginFields() {
         usernaemTxt.clear();
+        PasswordTxt.clear();
         visiblePassword.clear();
     }
 

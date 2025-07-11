@@ -3,10 +3,12 @@ package com.salon.Controller;
 import com.salon.Model.*;
 import com.salon.Model.Appointment.Appointment;
 import com.salon.Model.Appointment.AppointmentDAO;
-import com.salon.Model.Customers.Customer;
-import com.salon.Model.Customers.CustomerDAO;
+import com.salon.Model.Customers.LoyaltyCustomer;
+import com.salon.Model.Customers.LoyaltyCustomerDAO;
 import com.salon.Model.Services.Service;
 import com.salon.Model.Services.ServiceDAO;
+import com.salon.Model.Staff.Staff;
+import com.salon.Model.Staff.StaffDAO;
 import com.salon.Utils.CustomAlert;
 import com.salon.Utils.SmsService;
 import com.salon.Utils.ValidatorUtil;
@@ -38,7 +40,8 @@ public class AppointmentController {
     @FXML private ComboBox<Integer> minuteCombo;
     @FXML private ComboBox<String> ampmCombo;
     @FXML private ComboBox<String> serviceTypeCombo;
-    @FXML private TextField staffNameField;
+    @FXML private ComboBox<String> appointmentTypeCombo;
+    @FXML private ComboBox<String> staffNameCombo;
 
     @FXML private TableView<Appointment> appointmentTable;
     @FXML private TableColumn<Appointment, Date> colDate;
@@ -47,14 +50,17 @@ public class AppointmentController {
     @FXML private TableColumn<Appointment, String> colContact;
     @FXML private TableColumn<Appointment, String> colService;
     @FXML private TableColumn<Appointment, String> colStaff;
+    @FXML private TableColumn<Appointment, String> colAppointmentType;
 
     private int selectedAppointmentId = -1;
     private final ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
-    private final Map<String, Customer> customerMap = new HashMap<>();
+    private final Map<String, LoyaltyCustomer> customerMap = new HashMap<>();
 
     @FXML
     public void initialize() {
         loadServicesIntoComboBox();
+        loadStaffIntoComboBox();
+        appointmentTypeCombo.setItems(FXCollections.observableArrayList("Walk-in", "Wedding"));
         ampmCombo.setItems(FXCollections.observableArrayList("AM", "PM"));
 
         for (int i = 1; i <= 12; i++) hourCombo.getItems().add(i);
@@ -66,6 +72,7 @@ public class AppointmentController {
         colContact.setCellValueFactory(new PropertyValueFactory<>("clientContact"));
         colService.setCellValueFactory(new PropertyValueFactory<>("serviceType"));
         colStaff.setCellValueFactory(new PropertyValueFactory<>("staffName"));
+        colAppointmentType.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
 
         appointmentTable.setOnMouseClicked(e -> {
             Appointment selected = appointmentTable.getSelectionModel().getSelectedItem();
@@ -85,7 +92,8 @@ public class AppointmentController {
                 minuteCombo.setValue(minute);
                 ampmCombo.setValue(ampm);
                 serviceTypeCombo.setValue(selected.getServiceType());
-                staffNameField.setText(selected.getStaffName());
+                appointmentTypeCombo.setValue(selected.getAppointmentType());
+                staffNameCombo.setValue(selected.getStaffName());
             }
         });
 
@@ -100,15 +108,15 @@ public class AppointmentController {
     private void loadCustomerNames() {
         try {
             Connection conn = DatabaseConnection.connect();
-            CustomerDAO customerDAO = new CustomerDAO(conn);
-            List<Customer> customers = customerDAO.getAllCustomers();
+            LoyaltyCustomerDAO loyaltyDAO = new LoyaltyCustomerDAO(conn);
+            List<LoyaltyCustomer> customers = loyaltyDAO.getAllCustomers();
 
-            for (Customer c : customers) {
-                customerMap.put(c.getFullName(), c);
+            for (LoyaltyCustomer c : customers) {
+                customerMap.put(c.getName(), c);
             }
 
             clientName.textProperty().addListener((obs, oldVal, newVal) -> {
-                Customer selected = customerMap.get(newVal);
+                LoyaltyCustomer selected = customerMap.get(newVal);
                 if (selected != null) {
                     clientContact.setText(selected.getPhone());
                     clientContact.setDisable(true);
@@ -142,12 +150,25 @@ public class AppointmentController {
         }
     }
 
+    private void loadStaffIntoComboBox() {
+        try {
+            Connection conn = DatabaseConnection.connect();
+            StaffDAO staffDAO = new StaffDAO(conn);
+            ObservableList<String> staffNames = staffDAO.getAllStaffNames();
+            staffNameCombo.setItems(staffNames);
+        } catch (Exception e) {
+            e.printStackTrace();
+            CustomAlert.showAlert(Alert.AlertType.ERROR, "Staff Error", "Could not load staff members.");
+        }
+    }
+
+
     @FXML
     public void handleAddAppointment() {
         try {
             if (clientName.getText().isEmpty() || clientContact.getText().isEmpty() || appointmentDate.getValue() == null ||
                     hourCombo.getValue() == null || minuteCombo.getValue() == null || ampmCombo.getValue() == null ||
-                    serviceTypeCombo.getValue() == null || staffNameField.getText().isEmpty()) {
+                    serviceTypeCombo.getValue() == null || staffNameCombo.getValue() == null || appointmentTypeCombo.getValue() == null) {
 
                 CustomAlert.showAlert(Alert.AlertType.WARNING, "Missing Fields", "Please fill all fields.");
                 return;
@@ -173,20 +194,18 @@ public class AppointmentController {
             appointment.setDate(Date.valueOf(appointmentDate.getValue()));
             appointment.setTime(Time.valueOf(timeStr));
             appointment.setServiceType(serviceTypeCombo.getValue());
-            appointment.setStaffName(staffNameField.getText().trim());
+            appointment.setStaffName(staffNameCombo.getValue());
+            appointment.setAppointmentType(appointmentTypeCombo.getValue());
 
             if (selectedAppointmentId == -1) {
                 AppointmentDAO.insertAppointment(appointment);
                 CustomAlert.showSuccess("Appointment Booked!");
 
-                String message = String.format("Hi %s, your appointment is confirmed for %s at %02d:%02d %s. Thanks for choosing Salon Magical!",
-                        appointment.getClientName(),
-                        appointment.getDate(),
-                        hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue());
+                String message = String.format("Hi %s, your %s appointment is confirmed for %s at %02d:%02d %s. - Salon Magical",
+                        appointment.getClientName(), appointment.getAppointmentType(),
+                        appointment.getDate(), hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue());
 
-                if (SmsService.sendSms(appointment.getClientContact(), message)) {
-                    CustomAlert.showSuccess("SMS confirmation sent successfully!");
-                }
+                SmsService.sendSms(appointment.getClientContact(), message);
 
             } else {
                 appointment.setId(selectedAppointmentId);
@@ -198,10 +217,7 @@ public class AppointmentController {
                         appointment.getDate(),
                         hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue());
 
-                if (SmsService.sendSms(appointment.getClientContact(), message)) {
-                    CustomAlert.showSuccess("SMS update sent successfully!");
-                }
-
+                SmsService.sendSms(appointment.getClientContact(), message);
                 selectedAppointmentId = -1;
             }
 
@@ -231,9 +247,7 @@ public class AppointmentController {
                     selected.getDate().toString(),
                     selected.getTime().toString().substring(0, 5));
 
-            if (SmsService.sendSms(selected.getClientContact(), message)) {
-                CustomAlert.showSuccess("SMS cancellation sent successfully!");
-            }
+            SmsService.sendSms(selected.getClientContact(), message);
 
             loadAppointments();
             clearFields();
@@ -244,13 +258,14 @@ public class AppointmentController {
 
     @FXML
     public void handleUpdate() {
-        handleAddAppointment(); // reuse logic
+        handleAddAppointment();
     }
 
     @FXML
     public void handleRefresh() {
         clearFields();
         loadServicesIntoComboBox();
+        loadStaffIntoComboBox();
         loadCustomerNames();
         loadAppointments();
 
@@ -272,7 +287,8 @@ public class AppointmentController {
         minuteCombo.setValue(null);
         ampmCombo.setValue(null);
         serviceTypeCombo.setValue(null);
-        staffNameField.clear();
+        staffNameCombo.setValue(null);
+        appointmentTypeCombo.setValue(null);
         selectedAppointmentId = -1;
         clientContact.setDisable(false);
     }
@@ -294,6 +310,7 @@ public class AppointmentController {
             }
 
             dateCombobox.setItems(FXCollections.observableArrayList(uniqueDates));
+            if (dateCombobox.getValue() == null) dateCombobox.setValue("All");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -315,14 +332,9 @@ public class AppointmentController {
             if (selectedDate != null && !selectedDate.equals("All")) {
                 LocalDate apptDate = appt.getDate().toLocalDate();
                 switch (selectedDate) {
-                    case "Today":
-                        matchesDate = apptDate.equals(today);
-                        break;
-                    case "This Week":
-                        matchesDate = !apptDate.isBefore(weekStart) && !apptDate.isAfter(weekEnd);
-                        break;
-                    default:
-                        matchesDate = apptDate.toString().equals(selectedDate);
+                    case "Today" -> matchesDate = apptDate.equals(today);
+                    case "This Week" -> matchesDate = !apptDate.isBefore(weekStart) && !apptDate.isAfter(weekEnd);
+                    default -> matchesDate = apptDate.toString().equals(selectedDate);
                 }
             }
 
@@ -345,13 +357,14 @@ public class AppointmentController {
                     LocalDateTime apptDateTime = LocalDateTime.of(appt.getDate().toLocalDate(), appt.getTime().toLocalTime());
                     long minutesUntil = Duration.between(now, apptDateTime).toMinutes();
 
-                    if (minutesUntil <= 120 && minutesUntil > 110) {
+                    if (minutesUntil <= 120 && minutesUntil > 110 && !appt.isReminderSent()) {
                         String reminderMessage = String.format(
-                                "Hi %s, your appointment is today at %s. Please be on time or it may be cancelled. - Salon Magical",
+                                "Hi %s, your appointment is today at %s. Please be on time. - Salon Magical",
                                 appt.getClientName(),
                                 appt.getTime().toString().substring(0, 5)
                         );
                         SmsService.sendSms(appt.getClientContact(), reminderMessage);
+                        AppointmentDAO.markReminderSent(appt.getId());
                     }
                 }
             } catch (Exception e) {
