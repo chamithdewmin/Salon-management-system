@@ -36,19 +36,18 @@
     <DatePicker fx:id="filterDatePicker" layoutX="285.0" layoutY="288.0" prefWidth="180.0" />
 
     <!-- TableView -->
-    <TableView fx:id="reportTable" layoutX="63.0" layoutY="367.0" prefHeight="500" prefWidth="1440">
+    <TableView fx:id="reportTable" layoutX="63.0" layoutY="367.0" prefHeight="578.0" prefWidth="1217.0">
         <columns>
-            <TableColumn fx:id="dateColumn" prefWidth="168.0" text="Date" />
-            <TableColumn fx:id="customerColumn" prefWidth="270.0" text="Customer Name" />
-            <TableColumn fx:id="serviceColumn" prefWidth="280.0" text="Services &amp; Count" />
-            <TableColumn fx:id="staffColumn" prefWidth="232.0" text="Staff Name" />
-            <TableColumn fx:id="visitColumn" prefWidth="174.0" text="Total Visits" />
-            <TableColumn fx:id="amountColumn" prefWidth="174.0" text="Amount (Rs)" />
+            <TableColumn fx:id="dateColumn" prefWidth="188.0" text="Date" />
+            <TableColumn fx:id="customerColumn" prefWidth="284.0" text="Customer Name" />
+            <TableColumn fx:id="serviceColumn" prefWidth="309.0" text="Description" />
+            <TableColumn fx:id="staffColumn" prefWidth="233.0" text="Staff Name" />
+            <TableColumn fx:id="amountColumn" prefWidth="199.0" text="Amount (Rs)" />
         </columns>
     </TableView>
 
     <!-- Buttons -->
-    <Button fx:id="downloadButton" layoutX="61.0" layoutY="882.0" prefHeight="45.0" prefWidth="218.0" style="-fx-background-color: #00FFB0; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Download PDF Report" />
-    <Button fx:id="refreshButton" layoutX="1341.0" layoutY="37.0" onAction="#handleRefresh" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Refresh" />
+    <Button fx:id="downloadButton" layoutX="1062.0" layoutY="298.0" prefHeight="45.0" prefWidth="218.0" style="-fx-background-color: #00FFB0; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Download PDF Report" />
+    <Button fx:id="refreshButton" layoutX="1300.0" layoutY="37.0" onAction="#handleRefresh" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Refresh" />
 
 </AnchorPane>

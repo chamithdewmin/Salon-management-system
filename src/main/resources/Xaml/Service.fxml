@@ -11,20 +11,20 @@
 
     <!-- Heading -->
     <Label layoutX="68.0" layoutY="45.0" styleClass="task-title" text="Add New Service" />
-    <TextField fx:id="nameField" layoutX="138.0" layoutY="225.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter service name" stylesheets="@../CSS/All.css" />
-    <TextField fx:id="priceField" layoutX="138.0" layoutY="317.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter price" />
+    <TextField fx:id="nameField" layoutX="139.0" layoutY="248.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter service name" stylesheets="@../CSS/All.css" />
+    <TextField fx:id="priceField" layoutX="138.0" layoutY="334.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter price" />
 
     <!-- Add Service Button -->
-    <Button fx:id="addButton" layoutX="166.0" layoutY="409.0" onAction="#onAddService" prefHeight="51.0" prefWidth="245.0" text="➕ Add Service" />
+    <Button fx:id="addButton" layoutX="166.0" layoutY="445.0" onAction="#onAddService" prefHeight="51.0" prefWidth="245.0" text="➕ Add Service" />
 
     <!-- Delete Button -->
-    <Button fx:id="deleteButton" layoutX="166.0" layoutY="479.0" onAction="#onDeleteService" prefHeight="51.0" prefWidth="245.0" text="🗑 Delete Selected" />
+    <Button fx:id="deleteButton" layoutX="166.0" layoutY="515.0" onAction="#onDeleteService" prefHeight="51.0" prefWidth="245.0" text="🗑 Delete Selected" />
 
     <!-- Services Table -->
-    <TableView fx:id="serviceTable" layoutX="612.0" layoutY="122.0" prefHeight="677.0" prefWidth="849.0">
+    <TableView fx:id="serviceTable" layoutX="540.0" layoutY="107.0" prefHeight="677.0" prefWidth="739.0">
         <columns>
-            <TableColumn fx:id="nameCol" prefWidth="450.0" text="Service Name" />
-            <TableColumn fx:id="priceCol" prefWidth="400.0" text="Price (Rs.)" />
+            <TableColumn fx:id="nameCol" prefWidth="383.0" text="Service Name" />
+            <TableColumn fx:id="priceCol" prefWidth="354.0" text="Price (Rs.)" />
         </columns>
     </TableView>
    <Button fx:id="refreshBtn" layoutX="1329.0" layoutY="34.0" onAction="#handleRefresh" prefHeight="52.0" prefWidth="132.0" text="Refresh" />

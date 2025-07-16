@@ -20,7 +20,7 @@
 .task-title {
     -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-text-fill: #00C6A2;
+    -fx-text-fill: #14d900;
 }
 
 /* === INPUT FIELDS (TextField & TextArea) === */
@@ -39,8 +39,8 @@
 
 .text-field:focused,
 .text-area:focused {
-    -fx-border-color: #00C6A2;
-    -fx-effect: dropshadow(one-pass-box, #00C6A244, 5, 0, 2, 2);
+    -fx-border-color: #14d900;
+    -fx-effect: dropshadow(one-pass-box, #00960b, 5, 0, 2, 2);
 }
 
 /* === TEXTAREA EXTRA DARK BACKGROUND === */
@@ -55,12 +55,12 @@
     -fx-font-size: 14px;
 }
 .radio-button:selected .radio {
-    -fx-background-color: #00C6A2;
+    -fx-background-color: #14d900;
 }
 
 /* === BUTTON === */
 .button {
-    -fx-background-color: #00C6A2;
+    -fx-background-color: #14d900;
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -71,7 +71,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #1DE9B6;
+    -fx-background-color: #00960b;
 }
 
 /* === SCROLLBAR STYLING === */
@@ -90,5 +90,5 @@
 }
 
 .scroll-bar .thumb:hover {
-    -fx-background-color: #00C6A2;
+    -fx-background-color: #14d900;
 }

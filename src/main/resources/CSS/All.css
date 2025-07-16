@@ -31,7 +31,7 @@
     -fx-text-fill: #FFFFFF;
     -fx-prompt-text-fill: #AAAAAA;
     -fx-border-color: #333333;
-    -fx-border-radius: 10;
+    -fx-border-radius: 5;
     -fx-background-radius: 10;
     -fx-padding: 8 12;
     -fx-font-size: 13px;
@@ -132,7 +132,7 @@
 
 /* === BUTTONS === */
 .button {
-    -fx-background-color: #00C6A2;
+    -fx-background-color: #00c20c;
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
     -fx-padding: 10 20;
@@ -143,14 +143,14 @@
 }
 
 .button:hover {
-    -fx-background-color: #1DE9B6;
+    -fx-background-color: #00960b;
 }
 
 /* === TABLEVIEW === */
 .table-view {
     -fx-background-color: #1A1A1A;
     -fx-border-color: #2C2C2C;
-    -fx-border-radius: 8;
+    -fx-border-radius: 5;
     -fx-background-radius: 8;
     -fx-text-fill: #E0E0E0;
 }

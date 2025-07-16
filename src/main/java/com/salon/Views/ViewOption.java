@@ -9,5 +9,6 @@ public enum ViewOption {
     CUSTOMER,
     STAFF,
     LOGOUT,
-    EXPENSES
+    EXPENSES,
+    ADDSTAFF
 }

@@ -20,6 +20,7 @@ public class ViewFactory {
     private AnchorPane customerView;
     private AnchorPane staffView;
     private AnchorPane ExpensesView;
+    private AnchorPane AddStaffView;
 
     public ObjectProperty<ViewOption> getMenuItem() {
         return menuItem;
@@ -34,6 +35,17 @@ public class ViewFactory {
             }
         }
         return dashboardView;
+    }
+
+    public AnchorPane AddStaffShow() {
+        if (AddStaffView == null) {
+            try {
+                AddStaffView = new FXMLLoader(getClass().getResource("/Xaml/staff.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return AddStaffView;
     }
 
     public AnchorPane showIncomeExpensesView() {

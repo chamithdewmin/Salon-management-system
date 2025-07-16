@@ -25,8 +25,6 @@ public class CashierController {
     @FXML private ComboBox<String> customerNameComboBox, serviceComboBox, staffComboBox;
     @FXML private TextField phoneNumberTxt, totalAmountField, cashGivenField, changeField;
     @FXML private Button addServiceButton, addPaymentButton, refreshButton;
-    @FXML private TextField descriptionTxt;
-    @FXML private RadioButton addDescriptionRadio;
     @FXML private TableView<PaymentSummary> paymentSummaryTable;
     @FXML private TableColumn<PaymentSummary, String> colCustomerName, colService, colStaff, colDescription;
     @FXML private TableColumn<PaymentSummary, Double> colAmount;
@@ -111,10 +109,6 @@ public class CashierController {
         }
     }
 
-    @FXML
-    private void toggleDescription() {
-        descriptionTxt.setVisible(addDescriptionRadio.isSelected());
-    }
 
     @FXML
     private void handleAddService() {
@@ -139,9 +133,8 @@ public class CashierController {
                 .mapToDouble(Service::getPrice)
                 .findFirst().orElse(0.0);
 
-        String description = addDescriptionRadio.isSelected() ? descriptionTxt.getText() : "";
 
-        summaryData.add(new PaymentSummary(customer, service, staff, amount, description));
+        summaryData.add(new PaymentSummary(customer, service, staff, amount));
         calculateTotalAmount();
     }
 
@@ -265,9 +258,6 @@ public class CashierController {
         totalAmountField.clear();
         cashGivenField.clear();
         changeField.clear();
-        descriptionTxt.clear();
-        addDescriptionRadio.setSelected(false);
-        descriptionTxt.setVisible(false);
     }
 
     @FXML
@@ -281,9 +271,6 @@ public class CashierController {
             cashGivenField.clear();
             changeField.clear();
             phoneNumberTxt.clear();
-            descriptionTxt.clear();
-            addDescriptionRadio.setSelected(false);
-            descriptionTxt.setVisible(false);
             loadCustomerNames();
             loadServiceOptions();
             loadStaffNames();

@@ -28,7 +28,6 @@ public class ReportController {
     @FXML private TableColumn<Income, String> customerColumn;
     @FXML private TableColumn<Income, String> serviceColumn;
     @FXML private TableColumn<Income, String> staffColumn;
-    @FXML private TableColumn<Income, String> visitColumn;
     @FXML private TableColumn<Income, Double> amountColumn;
 
     @FXML private Button downloadButton;
@@ -62,7 +61,6 @@ public class ReportController {
         customerColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCustomerName()));
         serviceColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getDescription()));
         staffColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getStaffName()));
-        visitColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getVisitCount()));
         amountColumn.setCellValueFactory(cell -> new SimpleObjectProperty<>(cell.getValue().getAmount()));
     }
 

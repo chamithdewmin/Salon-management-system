@@ -10,21 +10,21 @@
 <AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/sms.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.SmsSenderController">
 
     <!-- Select All Customers -->
-    <RadioButton fx:id="selectAllRadio" layoutX="675.0" layoutY="226.0" onAction="#toggleAllContacts" styleClass="radio-button" text="Select All Customers" />
+    <RadioButton fx:id="selectAllRadio" layoutX="630.0" layoutY="236.0" onAction="#toggleAllContacts" styleClass="radio-button" text="Select All Customers" />
 
     <!-- Number Label -->
     <Label layoutX="144.0" layoutY="188.0" styleClass="label" text="Phone Number:" />
 
     <!-- Number Input -->
-    <TextField fx:id="numberTxt" layoutX="144.0" layoutY="213.0" prefHeight="45.0" prefWidth="400.0" promptText="Enter mobile number" styleClass="text-field" />
+    <TextField fx:id="numberTxt" layoutX="144.0" layoutY="217.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter mobile number" styleClass="text-field" />
 
     <!-- Message Label -->
-    <Label layoutX="144.0" layoutY="300.0" styleClass="label" text="Message:" />
+    <Label layoutX="144.0" layoutY="330.0" styleClass="label" text="Message:" />
 
     <!-- Message Input -->
-    <TextArea fx:id="massageTxt" layoutX="144.0" layoutY="325.0" prefHeight="285.0" prefWidth="800.0" promptText="Type your message here..." styleClass="text-area" />
+    <TextArea fx:id="massageTxt" layoutX="144.0" layoutY="370.0" prefHeight="285.0" prefWidth="800.0" promptText="Type your message here..." styleClass="text-area" />
 
     <!-- Send Button -->
-    <Button fx:id="sendButton" layoutX="794.0" layoutY="633.0" onAction="#sendSms" prefHeight="50.0" prefWidth="150.0" styleClass="primary-button" text="Send" />
+    <Button fx:id="sendButton" layoutX="794.0" layoutY="674.0" onAction="#sendSms" prefHeight="50.0" prefWidth="150.0" styleClass="primary-button" text="Send" />
    <Label layoutX="67.0" layoutY="54.0" styleClass="task-title" text="Send SMS to Customers" />
 </AnchorPane>

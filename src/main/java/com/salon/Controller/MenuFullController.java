@@ -28,6 +28,7 @@ public class MenuFullController implements Initializable {
                 case SMS -> menuParent.setCenter(Model.getInstance().getViewFactory().showSms());
                 case CUSTOMER -> menuParent.setCenter(Model.getInstance().getViewFactory().customer());
                 case EXPENSES -> menuParent.setCenter(Model.getInstance().getViewFactory().showExpenses());
+                case ADDSTAFF -> menuParent.setCenter(Model.getInstance().getViewFactory().AddStaffShow());
                 case STAFF -> menuParent.setCenter(Model.getInstance().getViewFactory().showStaff());
                 case LOGOUT -> {
                     boolean confirm = CustomAlert.showConfirmation("Logout", "Are you sure you want to logout?");
