@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="1000.0" prefWidth="1600.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.StaffManagmentController">
+
+   <!-- Title -->
+   <Label layoutX="105.0" layoutY="40.0" styleClass="task-title" text="Staff Income" />
+
+   <!-- Staff Name ComboBox -->
+   <ComboBox fx:id="staffName" layoutX="105.0" layoutY="111.0" prefHeight="58.0" prefWidth="244.0" promptText="Select Staff" styleClass="input-combo" />
+
+   <!-- Filter Type ComboBox -->
+   <ComboBox fx:id="Date" layoutX="430.0" layoutY="111.0" prefHeight="58.0" prefWidth="244.0" promptText="Filter: Daily / Monthly" styleClass="input-combo" />
+
+   <!-- Total Income Label -->
+   <Label fx:id="TotalIncome" layoutX="105.0" layoutY="200.0" prefHeight="70.0" prefWidth="600.0" styleClass="summary-label" text="Total Income: Rs. 0.00" />
+</AnchorPane>

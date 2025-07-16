@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="250.0" styleClass="root" stylesheets="@../CSS/Menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.MenuController">
 
@@ -13,7 +15,7 @@
    </ImageView>
 
    <!-- Dashboard Button -->
-   <Button fx:id="dashboardButton" layoutX="24.0" layoutY="159.0" prefWidth="200.0" styleClass="Button" stylesheets="@../CSS/Menu.css" text="Cashier">
+   <Button fx:id="dashboardButton" layoutX="24.0" layoutY="159.0" prefHeight="50.0" prefWidth="200.0" styleClass="Button" stylesheets="@../CSS/Menu.css" text="Cashier">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <Image url="@../images/cash.png" />
@@ -22,7 +24,7 @@
    </Button>
 
    <!-- Record Transaction Button -->
-   <Button fx:id="AddRateButton" layoutX="24.0" layoutY="229.0" prefWidth="200.0" text="Appointments">
+   <Button fx:id="AddRateButton" layoutX="24.0" layoutY="229.0" prefHeight="50.0" prefWidth="200.0" text="Appointments">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <Image url="@../images/record.png" />
@@ -31,7 +33,7 @@
    </Button>
 
    <!-- SMS Sender Button -->
-   <Button fx:id="smsBtn" layoutX="24.0" layoutY="480.0" prefWidth="200.0" text="SMS Sender">
+   <Button fx:id="smsBtn" layoutX="24.0" layoutY="510.0" prefHeight="50.0" prefWidth="200.0" text="SMS Sender">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <Image url="@../images/sms.png" />
@@ -40,7 +42,7 @@
    </Button>
 
    <!-- TO-DO Button -->
-   <Button fx:id="taskBtn" layoutX="24.0" layoutY="361.0" prefWidth="200.0" text="Services">
+   <Button fx:id="taskBtn" layoutX="24.0" layoutY="370.0" prefHeight="50.0" prefWidth="200.0" text="Services">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <Image url="@../images/service.png" />
@@ -49,21 +51,21 @@
    </Button>
 
    <!-- View Reports Button -->
-   <Button fx:id="SettingButton" layoutX="24.0" layoutY="661.0" prefWidth="200.0" text="View Reports">
+   <Button fx:id="SettingButton" layoutX="24.0" layoutY="716.0" prefHeight="50.0" prefWidth="200.0" text="View Reports">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <Image url="@../images/report1.png" />
          </ImageView>
       </graphic>
    </Button>
-   <Button fx:id="customerBtn" layoutX="24.0" layoutY="419.0" prefWidth="200.0" text="Loyalty Customers">
+   <Button fx:id="customerBtn" layoutX="24.0" layoutY="442.0" prefHeight="50.0" prefWidth="200.0" text="Loyalty Customers">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <Image url="@../images/customer.png" />
          </ImageView>
       </graphic>
    </Button>
-   <Button fx:id="staffBtn" layoutX="24.0" layoutY="539.0" prefWidth="200.0" text="Salary Check">
+   <Button fx:id="staffBtn" layoutX="24.0" layoutY="578.0" prefHeight="50.0" prefWidth="200.0" text="Staff Salary">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -72,7 +74,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button fx:id="logoutBtn" layoutX="27.0" layoutY="908.0" prefWidth="200.0" text="Logout">
+   <Button fx:id="logoutBtn" layoutX="27.0" layoutY="908.0" prefHeight="40.0" prefWidth="200.0" text="Logout">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -81,7 +83,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button fx:id="addExpaenceBtn" layoutX="24.0" layoutY="296.0" prefWidth="200.0" text="Add Expences">
+   <Button fx:id="addExpaenceBtn" layoutX="24.0" layoutY="300.0" prefHeight="50.0" prefWidth="200.0" text="Add Expences">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -90,7 +92,7 @@
          </ImageView>
       </graphic>
    </Button>
-   <Button fx:id="addStaff" layoutX="24.0" layoutY="600.0" prefWidth="200.0" text="Add Staff">
+   <Button fx:id="addStaff" layoutX="25.0" layoutY="646.0" prefHeight="50.0" prefWidth="200.0" text="Add Staff">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -99,5 +101,10 @@
          </ImageView>
       </graphic>
    </Button>
+   <Label layoutX="45.0" layoutY="84.0" prefHeight="50.0" prefWidth="159.0" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE">
+      <font>
+         <Font size="11" />
+      </font>
+   </Label>
 
 </AnchorPane>

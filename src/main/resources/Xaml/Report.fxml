@@ -6,37 +6,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.ReportController">
 
-    <!-- Title -->
-    <Label layoutX="56.0" layoutY="37.0" style="-fx-text-fill: white; -fx-font-size: 30px; -fx-font-weight: bold;" text="Financial Report" />
-
     <!-- Summary Boxes -->
     <HBox layoutX="61.0" layoutY="116.0" spacing="30">
         <VBox prefHeight="100" prefWidth="300" spacing="10" style="-fx-background-color: #2c2c2c; -fx-padding: 20; -fx-background-radius: 15;">
             <Label style="-fx-text-fill: #00FFB0; -fx-font-size: 18;" text="Total Income" />
-            <Label fx:id="totalIncomeLabel" style="-fx-text-fill: white; -fx-font-size: 22; -fx-font-weight: bold;" text="Rs. 0.00" />
+            <Label fx:id="totalIncomeLabel" text="Rs. 0.00" />
         </VBox>
         <VBox prefHeight="100" prefWidth="300" spacing="10" style="-fx-background-color: #2c2c2c; -fx-padding: 20; -fx-background-radius: 15;">
             <Label style="-fx-text-fill: #FF6B6B; -fx-font-size: 18;" text="Total Expense" />
-            <Label fx:id="totalExpenseLabel" style="-fx-text-fill: white; -fx-font-size: 22; -fx-font-weight: bold;" text="Rs. 0.00" />
+            <Label fx:id="totalExpenseLabel" text="Rs. 0.00" />
         </VBox>
         <VBox prefHeight="100" prefWidth="300" spacing="10" style="-fx-background-color: #2c2c2c; -fx-padding: 20; -fx-background-radius: 15;">
             <Label style="-fx-text-fill: #FFD700; -fx-font-size: 18;" text="Total Savings" />
-            <Label fx:id="totalSavingLabel" style="-fx-text-fill: white; -fx-font-size: 22; -fx-font-weight: bold;" text="Rs. 0.00" />
+            <Label fx:id="totalSavingLabel" text="Rs. 0.00" />
         </VBox>
     </HBox>
 
     <!-- Filters -->
-    <ComboBox fx:id="typeComboBox" layoutX="63.0" layoutY="293.0" prefWidth="200" promptText="Select Type" />
-    <DatePicker fx:id="filterDatePicker" layoutX="285.0" layoutY="288.0" prefWidth="180.0" />
+    <ComboBox fx:id="typeComboBox" layoutX="63.0" layoutY="284.0" prefHeight="58" prefWidth="244" promptText="Select Type" />
+    <DatePicker fx:id="filterDatePicker" layoutX="329.0" layoutY="284.0" prefHeight="58" prefWidth="244.0" />
 
     <!-- TableView -->
-    <TableView fx:id="reportTable" layoutX="63.0" layoutY="367.0" prefHeight="578.0" prefWidth="1217.0">
+    <TableView fx:id="reportTable" layoutX="61.0" layoutY="369.0" prefHeight="578.0" prefWidth="1217.0">
         <columns>
             <TableColumn fx:id="dateColumn" prefWidth="188.0" text="Date" />
             <TableColumn fx:id="customerColumn" prefWidth="284.0" text="Customer Name" />
@@ -46,8 +45,25 @@
         </columns>
     </TableView>
 
-    <!-- Buttons -->
-    <Button fx:id="downloadButton" layoutX="1062.0" layoutY="298.0" prefHeight="45.0" prefWidth="218.0" style="-fx-background-color: #00FFB0; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Download PDF Report" />
-    <Button fx:id="refreshButton" layoutX="1300.0" layoutY="37.0" onAction="#handleRefresh" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #ffffff; -fx-text-fill: black; -fx-font-size: 16; -fx-background-radius: 10;" text="Refresh" />
+    <!-- Download Button with Icon -->
+    <Button fx:id="downloadButton" layoutX="1339.0" layoutY="846.0" prefHeight="45.0" prefWidth="218.0" text="Download PDF Report">
+        <graphic>
+            <ImageView fitHeight="20" fitWidth="20">
+                <image><Image url="@../images/download 1.png" /></image>
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <!-- Refresh Button with Icon -->
+    <Button fx:id="refreshButton" layoutX="1475.0" layoutY="46.0" onAction="#handleRefresh" prefHeight="58.0" prefWidth="128.0" text="Refresh">
+        <graphic>
+            <ImageView fitHeight="20" fitWidth="20">
+                <image><Image url="@../images/refresh.png" /></image>
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <!-- Title -->
+    <Label layoutX="67.0" layoutY="54.0" styleClass="task-title" text="Financial Report" />
 
 </AnchorPane>

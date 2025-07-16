@@ -5,8 +5,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="250.0" styleClass="root" stylesheets="@../CSS/Menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.StaffMenuController">
+<AnchorPane prefHeight="1000.0" prefWidth="250.0" styleClass="root" stylesheets="@../CSS/Menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.StaffMenuController">
 
     <!-- Logo -->
     <ImageView fitHeight="75.0" fitWidth="213.0" layoutX="18.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
@@ -14,7 +15,7 @@
     </ImageView>
 
     <!-- Dashboard Button -->
-    <Button fx:id="dashboardButton" layoutX="24.0" layoutY="159.0" prefWidth="200.0" styleClass="Button" stylesheets="@../CSS/Menu.css" text="Cashier">
+    <Button fx:id="dashboardButton" layoutX="24.0" layoutY="159.0" prefHeight="50.0" prefWidth="200.0" styleClass="Button" text="Cashier">
         <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0">
                 <Image url="@../images/dashboard.png" />
@@ -23,7 +24,7 @@
     </Button>
 
     <!-- Record Transaction Button -->
-    <Button fx:id="AddRateButton" layoutX="24.0" layoutY="229.0" prefWidth="200.0" text="Appointments">
+    <Button fx:id="AddRateButton" layoutX="24.0" layoutY="229.0" prefHeight="50.0" prefWidth="200.0" text="Appointments">
         <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0">
                 <Image url="@../images/record.png" />
@@ -32,14 +33,14 @@
     </Button>
 
     <!-- SMS Sender Button -->
-    <Button fx:id="smsBtn" layoutX="27.0" layoutY="296.0" prefWidth="200.0" text="SMS Sender">
+    <Button fx:id="smsBtn" layoutX="26.0" layoutY="299.0" prefHeight="50.0" prefWidth="200.0" text="SMS Sender">
         <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0">
                 <Image url="@../images/sms.png" />
             </ImageView>
         </graphic>
     </Button>
-    <Button fx:id="staffBtn" layoutX="24.0" layoutY="360.0" prefWidth="200.0" text="Staff">
+    <Button fx:id="staffBtn" layoutX="26.0" layoutY="370.0" prefHeight="50.0" prefWidth="200.0" text="Staff">
         <graphic>
             <ImageView fitHeight="20.0" fitWidth="20.0">
                 <image>
@@ -48,8 +49,11 @@
             </ImageView>
         </graphic>
     </Button>
-    <Label layoutX="41.0" layoutY="101.0" stylesheets="@../CSS/Menu.css" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE" />
-   <Button fx:id="logoutBtn" layoutX="24.0" layoutY="720.0" prefWidth="200.0" text="Logout">
+    <Label layoutX="46.0" layoutY="84.0" prefHeight="50.0" prefWidth="159.0" text="CREATIVE HAIR DESIGN STUDIO" textFill="WHITE">
+      <font>
+         <Font size="8" />
+      </font></Label>
+   <Button fx:id="logoutBtn" layoutX="26.0" layoutY="909.0" prefHeight="50.0" prefWidth="200.0" text="Logout">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>

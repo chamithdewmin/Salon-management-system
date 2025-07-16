@@ -5,28 +5,58 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.ServiceController">
 
     <!-- Heading -->
-    <Label layoutX="68.0" layoutY="45.0" styleClass="task-title" text="Add New Service" />
-    <TextField fx:id="nameField" layoutX="139.0" layoutY="248.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter service name" stylesheets="@../CSS/All.css" />
-    <TextField fx:id="priceField" layoutX="138.0" layoutY="334.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter price" />
+    <Label layoutX="67.0" layoutY="54.0" styleClass="task-title" text="Service" />
+
+    <!-- Input Fields -->
+    <TextField fx:id="nameField" layoutX="142.0" layoutY="188.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter service name" />
+    <TextField fx:id="priceField" layoutX="141.0" layoutY="274.0" prefHeight="62.0" prefWidth="300.0" promptText="Enter price" />
 
     <!-- Add Service Button -->
-    <Button fx:id="addButton" layoutX="166.0" layoutY="445.0" onAction="#onAddService" prefHeight="51.0" prefWidth="245.0" text="➕ Add Service" />
+    <Button fx:id="addButton" layoutX="169.0" layoutY="385.0" onAction="#onAddService" prefHeight="51.0" prefWidth="245.0" text="Add Service">
+        <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+                <image>
+                    <Image url="@../images/add.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
 
     <!-- Delete Button -->
-    <Button fx:id="deleteButton" layoutX="166.0" layoutY="515.0" onAction="#onDeleteService" prefHeight="51.0" prefWidth="245.0" text="🗑 Delete Selected" />
+    <Button fx:id="deleteButton" layoutX="169.0" layoutY="455.0" onAction="#onDeleteService" prefHeight="51.0" prefWidth="245.0" text="Delete Selected">
+        <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+                <image>
+                    <Image url="@../images/bin.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
 
     <!-- Services Table -->
-    <TableView fx:id="serviceTable" layoutX="540.0" layoutY="107.0" prefHeight="677.0" prefWidth="739.0">
+    <TableView fx:id="serviceTable" layoutX="540.0" layoutY="95.0" prefHeight="689.0" prefWidth="704.0">
         <columns>
-            <TableColumn fx:id="nameCol" prefWidth="383.0" text="Service Name" />
-            <TableColumn fx:id="priceCol" prefWidth="354.0" text="Price (Rs.)" />
+            <TableColumn fx:id="nameCol" prefWidth="355.0" text="Service Name" />
+            <TableColumn fx:id="priceCol" prefWidth="347.0" text="Price (Rs.)" />
         </columns>
     </TableView>
-   <Button fx:id="refreshBtn" layoutX="1329.0" layoutY="34.0" onAction="#handleRefresh" prefHeight="52.0" prefWidth="132.0" text="Refresh" />
+
+    <!-- Refresh Button -->
+    <Button fx:id="refreshBtn" layoutX="1475.0" layoutY="46.0" onAction="#handleRefresh" prefHeight="58.0" prefWidth="128.0" text="Refresh">
+        <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0">
+                <image>
+                    <Image url="@../images/refresh.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
 
 </AnchorPane>

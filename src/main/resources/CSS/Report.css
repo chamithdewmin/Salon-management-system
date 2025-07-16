@@ -24,7 +24,7 @@
 
 /* === BUTTONS === */
 .button {
-    -fx-background-color: #00FFB0;
+    -fx-background-color: #00c20c;
     -fx-text-fill: black;
     -fx-font-size: 16px;
     -fx-background-radius: 10px;
@@ -32,7 +32,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #00e6a0;
+    -fx-background-color: #2d2d2d;
     -fx-effect: dropshadow(three-pass-box, rgba(0,255,176,0.3), 10, 0, 0, 4);
 }
 

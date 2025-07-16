@@ -19,7 +19,7 @@
 .task-title {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #00C6A2;
+    -fx-text-fill: #00c20c;
 }
 
 /* === INPUT FIELDS (TextField, ComboBox, DatePicker, TextArea) === */
@@ -41,7 +41,7 @@
 .text-field:focused,
 .combo-box:focused,
 .date-picker:focused {
-    -fx-border-color: #00C6A2;
+    -fx-border-color: #00c20c;
 }
 
 /* === COMBOBOX POPUP LIST === */
@@ -56,7 +56,7 @@
 }
 
 .combo-box-popup .list-cell:hover {
-    -fx-background-color: #00C6A2;
+    -fx-background-color: #2d2d2d;
     -fx-text-fill: #121212;
 }
 
@@ -110,11 +110,11 @@
 
 .date-picker .day-cell.today {
     -fx-background-color: #2d2d2d;
-    -fx-text-fill: #00e676;
+    -fx-text-fill: #00960b;
 }
 
 .date-picker .day-cell:selected {
-    -fx-background-color: #00C6A2;
+    -fx-background-color: #00c20c;
     -fx-text-fill: #000000;
     -fx-font-weight: bold;
 }
@@ -157,7 +157,7 @@
 
 .table-view .column-header {
     -fx-background-color: #242424;
-    -fx-text-fill: #00C6A2;
+    -fx-text-fill: #14d900;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
@@ -205,4 +205,9 @@
 .scroll-bar:vertical,
 .scroll-bar:horizontal {
     -fx-background-color: #222;
+}
+.task-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #14d900;
 }

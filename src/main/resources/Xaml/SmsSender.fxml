@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="850.0" prefWidth="1500.0" stylesheets="@../CSS/sms.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.SmsSenderController">
+<AnchorPane prefHeight="850.0" prefWidth="1500.0"
+            stylesheets="@../CSS/sms.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.salon.Controller.SmsSenderController">
 
-    <!-- Select All Customers -->
+    <!-- Title -->
+    <Label layoutX="67.0" layoutY="54.0" styleClass="task-title" text="SMS Sender" />
+
+    <!-- Select All -->
     <RadioButton fx:id="selectAllRadio" layoutX="630.0" layoutY="236.0" onAction="#toggleAllContacts" styleClass="radio-button" text="Select All Customers" />
 
-    <!-- Number Label -->
+    <!-- Phone Label -->
     <Label layoutX="144.0" layoutY="188.0" styleClass="label" text="Phone Number:" />
 
-    <!-- Number Input -->
+    <!-- Phone Input -->
     <TextField fx:id="numberTxt" layoutX="144.0" layoutY="217.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter mobile number" styleClass="text-field" />
 
     <!-- Message Label -->
@@ -24,7 +29,15 @@
     <!-- Message Input -->
     <TextArea fx:id="massageTxt" layoutX="144.0" layoutY="370.0" prefHeight="285.0" prefWidth="800.0" promptText="Type your message here..." styleClass="text-area" />
 
-    <!-- Send Button -->
-    <Button fx:id="sendButton" layoutX="794.0" layoutY="674.0" onAction="#sendSms" prefHeight="50.0" prefWidth="150.0" styleClass="primary-button" text="Send" />
-   <Label layoutX="67.0" layoutY="54.0" styleClass="task-title" text="Send SMS to Customers" />
+    <!-- Send Button with Icon -->
+    <Button fx:id="sendButton" layoutX="794.0" layoutY="674.0" onAction="#sendSms" prefHeight="50.0" prefWidth="150.0" styleClass="primary-button" text="Send">
+        <graphic>
+            <ImageView fitHeight="20" fitWidth="20">
+                <image>
+                    <Image url="@../images/send.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+
 </AnchorPane>

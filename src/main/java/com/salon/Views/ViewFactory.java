@@ -73,7 +73,7 @@ public class ViewFactory {
     public AnchorPane showStaff() {
         if (staffView == null) {
             try {
-                staffView = new FXMLLoader(getClass().getResource("/Xaml/StaffManagment.fxml")).load();
+                staffView = new FXMLLoader(getClass().getResource("/Xaml/salary.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }

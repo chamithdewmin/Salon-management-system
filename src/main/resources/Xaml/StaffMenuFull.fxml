@@ -2,7 +2,7 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="menuParent" stylesheets="@../CSS/Appointment.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.StaffMenuFullController">
+<BorderPane fx:id="menuParent" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.StaffMenuFullController">
 
     <left>
         <fx:include source="StaffMenu.fxml" />

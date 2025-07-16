@@ -1,0 +1,35 @@
+.root {
+    -fx-background-color: #1A1A1A;
+    -fx-font-family: "Segoe UI", "JetBrains Mono", sans-serif;
+}
+
+/* Title Label */
+.task-title {
+    -fx-font-size: 28px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* ComboBoxes */
+.input-combo {
+    -fx-background-color: #2E2E2E;
+    -fx-border-color: #444;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+}
+
+/* ComboBox Popup Text */
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #1A1A1A;
+}
+
+/* Income Label */
+.summary-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #00c20c;
+    -fx-font-weight: bold;
+}
