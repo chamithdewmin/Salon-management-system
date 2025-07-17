@@ -17,8 +17,8 @@
     <!-- Table -->
     <TableView fx:id="loyaltyTable" layoutX="49.0" layoutY="141.0" prefHeight="624.0" prefWidth="1356.0">
         <columns>
-            <TableColumn fx:id="colName" prefWidth="241.0" text="Customer Name" />
-            <TableColumn fx:id="colPhone" prefWidth="261.0" text="Phone" />
+            <TableColumn fx:id="colName" prefWidth="253.0" text="Customer Name" />
+            <TableColumn fx:id="colPhone" prefWidth="249.0" text="Phone" />
             <TableColumn fx:id="colTotal" prefWidth="203.0" text="Total Spent" />
             <TableColumn fx:id="colHasDiscount" prefWidth="185.0" text="Discount" />
             <TableColumn fx:id="colCategory" prefWidth="228.0" text="Category" />

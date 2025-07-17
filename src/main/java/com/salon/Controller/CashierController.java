@@ -24,6 +24,8 @@ public class CashierController {
 
     @FXML private ComboBox<String> customerNameComboBox, serviceComboBox, staffComboBox;
     @FXML private TextField phoneNumberTxt, totalAmountField, cashGivenField, changeField;
+    @FXML private TextField desTxt, amount2Txt;
+    @FXML private RadioButton addDefaultAmountRadio;
     @FXML private Button addServiceButton, addPaymentButton, refreshButton;
     @FXML private TableView<PaymentSummary> paymentSummaryTable;
     @FXML private TableColumn<PaymentSummary, String> colCustomerName, colService, colStaff, colDescription;
@@ -49,11 +51,54 @@ public class CashierController {
             customerNameComboBox.setEditable(true);
             customerNameComboBox.setItems(allCustomerNames);
             customerNameComboBox.setOnKeyReleased(this::handleCustomerAutoComplete);
+            phoneNumberTxt.setOnKeyReleased(this::handlePhoneAutoFill);
             staffComboBox.setItems(allStaffNames);
 
             setupTable();
+            desTxt.setVisible(false);
+            amount2Txt.setVisible(false);
         } else {
             CustomAlert.showAlert("Database Error", "Unable to connect to the database.");
+        }
+    }
+
+    private void handlePhoneAutoFill(KeyEvent event) {
+        String input = phoneNumberTxt.getText().trim();
+
+        if (input.length() >= 7) {
+            try {
+                List<LoyaltyCustomer> customers = loyaltyCustomerDAO.getAllCustomers();
+                Optional<LoyaltyCustomer> match = customers.stream()
+                        .filter(c -> c.getPhone().equals(input))
+                        .findFirst();
+
+                if (match.isPresent()) {
+                    LoyaltyCustomer customer = match.get();
+                    customerNameComboBox.setValue(customer.getName());
+                    customerNameComboBox.setDisable(true);
+                    phoneNumberTxt.setDisable(true);
+                } else {
+                    customerNameComboBox.setValue("");
+                    customerNameComboBox.setDisable(false);
+                    phoneNumberTxt.setDisable(false);
+                }
+            } catch (SQLException e) {
+                CustomAlert.showAlert("Phone Lookup Error", e.getMessage());
+            }
+        } else {
+            customerNameComboBox.setValue("");
+            customerNameComboBox.setDisable(false);
+        }
+    }
+
+    @FXML
+    private void handleRadioButtonChange() {
+        boolean isSelected = addDefaultAmountRadio.isSelected();
+        desTxt.setVisible(isSelected);
+        amount2Txt.setVisible(isSelected);
+        if (!isSelected) {
+            desTxt.clear();
+            amount2Txt.clear();
         }
     }
 
@@ -109,7 +154,6 @@ public class CashierController {
         }
     }
 
-
     @FXML
     private void handleAddService() {
         String customer = customerNameComboBox.getValue();
@@ -128,14 +172,36 @@ public class CashierController {
             }
         }
 
-        double amount = allServices.stream()
-                .filter(s -> s.getName().equals(service))
-                .mapToDouble(Service::getPrice)
-                .findFirst().orElse(0.0);
+        double amount;
+        String description;
 
+        if (addDefaultAmountRadio.isSelected()) {
+            try {
+                String amountText = amount2Txt.getText().trim();
+                if (amountText.isEmpty()) {
+                    CustomAlert.showAlert("Amount Error", "Please enter the default amount.");
+                    return;
+                }
+                amount = Double.parseDouble(amountText);
+                description = desTxt.getText().trim();
+            } catch (NumberFormatException e) {
+                CustomAlert.showAlert("Amount Error", "Please enter a valid amount.");
+                return;
+            }
+        } else {
+            amount = allServices.stream()
+                    .filter(s -> s.getName().equals(service))
+                    .mapToDouble(Service::getPrice)
+                    .findFirst().orElse(0.0);
+            description = service;
+        }
 
-        summaryData.add(new PaymentSummary(customer, service, staff, amount));
+        summaryData.add(new PaymentSummary(customer, service, staff, amount, description));
         calculateTotalAmount();
+        serviceComboBox.setValue(null);
+        staffComboBox.setValue(null);
+        desTxt.clear();
+        amount2Txt.clear();
     }
 
     private void calculateTotalAmount() {
@@ -173,7 +239,6 @@ public class CashierController {
         try {
             conn.setAutoCommit(false);
 
-            // Insert customer if not exists
             String checkSQL = "SELECT COUNT(*) FROM customer WHERE phone = ?";
             PreparedStatement checkStmt = conn.prepareStatement(checkSQL);
             checkStmt.setString(1, phone);
@@ -187,7 +252,6 @@ public class CashierController {
                 insertStmt.executeUpdate();
             }
 
-            // Insert into sales
             String insertSale = "INSERT INTO sales (customer_name, phone_number, services, staff, amount, description, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement insertSaleStmt = conn.prepareStatement(insertSale);
             String services = summaryData.stream().map(PaymentSummary::getService).collect(Collectors.joining(", "));
@@ -204,27 +268,25 @@ public class CashierController {
             insertSaleStmt.setString(7, date);
             insertSaleStmt.executeUpdate();
 
-            // Loyalty program update
             loyaltyCustomerDAO.addOrUpdateCustomerIfNeeded(name, phone, totalAmount, summaryData.get(0).getService());
 
-            // Income saving with split logic
             IncomeDAO incomeDAO = new IncomeDAO(conn);
             Set<String> addedToOwner = new HashSet<>();
 
             for (PaymentSummary summary : summaryData) {
                 String staffName = summary.getStaff();
                 double amount = summary.getAmount();
-                String service = summary.getService();
+                String recordedService = summary.getDescription();
 
                 if (staffName.equalsIgnoreCase("owner")) {
-                    if (!addedToOwner.contains(service)) {
-                        incomeDAO.insertIncome(new Income("owner", amount, date, service, name));
-                        addedToOwner.add(service);
+                    if (!addedToOwner.contains(recordedService)) {
+                        incomeDAO.insertIncome(new Income("owner", amount, date, recordedService, name));
+                        addedToOwner.add(recordedService);
                     }
                 } else {
                     double half = amount / 2;
-                    incomeDAO.insertIncome(new Income(staffName, half, date, service, name));
-                    incomeDAO.insertIncome(new Income("owner", half, date, service, name));
+                    incomeDAO.insertIncome(new Income(staffName, half, date, recordedService, name));
+                    incomeDAO.insertIncome(new Income("owner", half, date, recordedService, name));
                 }
             }
 
@@ -250,10 +312,17 @@ public class CashierController {
     }
 
     private void clearPaymentFields() {
+        customerNameComboBox.setDisable(false);
+        phoneNumberTxt.setDisable(false);
         customerNameComboBox.setValue(null);
         serviceComboBox.setValue(null);
         staffComboBox.setValue(null);
         phoneNumberTxt.clear();
+        desTxt.clear();
+        amount2Txt.clear();
+        addDefaultAmountRadio.setSelected(false);
+        desTxt.setVisible(false);
+        amount2Txt.setVisible(false);
         summaryData.clear();
         totalAmountField.clear();
         cashGivenField.clear();
@@ -263,6 +332,8 @@ public class CashierController {
     @FXML
     private void handleRefresh() {
         if (conn != null) {
+            customerNameComboBox.setDisable(false);
+            phoneNumberTxt.setDisable(false);
             customerNameComboBox.getItems().clear();
             serviceComboBox.getItems().clear();
             staffComboBox.getItems().clear();
@@ -271,6 +342,11 @@ public class CashierController {
             cashGivenField.clear();
             changeField.clear();
             phoneNumberTxt.clear();
+            desTxt.clear();
+            amount2Txt.clear();
+            addDefaultAmountRadio.setSelected(false);
+            desTxt.setVisible(false);
+            amount2Txt.setVisible(false);
             loadCustomerNames();
             loadServiceOptions();
             loadStaffNames();

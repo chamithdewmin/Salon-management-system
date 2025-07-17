@@ -11,24 +11,24 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="1000.0" prefWidth="1600.0" styleClass="root" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.AppointmentController">
+<AnchorPane prefHeight="1000.0" prefWidth="1650.0" styleClass="root" stylesheets="@../CSS/All.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salon.Controller.AppointmentController">
 
    <!-- Form Inputs -->
-   <DatePicker fx:id="appointmentDate" layoutX="87.0" layoutY="184.0" prefHeight="58.0" prefWidth="244.0" promptText="Appointment Date" styleClass="Date" />
+   <DatePicker fx:id="appointmentDate" layoutX="73.0" layoutY="184.0" prefHeight="58.0" prefWidth="244.0" promptText="Appointment Date" styleClass="Date" />
 
-   <ComboBox fx:id="hourCombo" layoutX="87.0" layoutY="260.0" prefHeight="49.0" prefWidth="120.0" promptText="Hour" />
-   <ComboBox fx:id="minuteCombo" layoutX="216.0" layoutY="260.0" prefHeight="49.0" prefWidth="120.0" promptText="Minute" />
-   <ComboBox fx:id="ampmCombo" layoutX="345.0" layoutY="260.0" prefHeight="49.0" prefWidth="80.0" promptText="AM/PM" />
+   <ComboBox fx:id="hourCombo" layoutX="73.0" layoutY="260.0" prefHeight="49.0" prefWidth="120.0" promptText="Hour" />
+   <ComboBox fx:id="minuteCombo" layoutX="202.0" layoutY="260.0" prefHeight="49.0" prefWidth="120.0" promptText="Minute" />
+   <ComboBox fx:id="ampmCombo" layoutX="331.0" layoutY="260.0" prefHeight="49.0" prefWidth="128.0" promptText="AM/PM" />
 
-   <TextField fx:id="clientName" layoutX="87.0" layoutY="325.0" prefHeight="58.0" prefWidth="244.0" promptText="Client Name" styleClass="desTxt" />
-   <TextField fx:id="clientContact" layoutX="87.0" layoutY="399.0" prefHeight="58.0" prefWidth="244.0" promptText="Contact Number" styleClass="rsTxt" />
+   <TextField fx:id="clientName" layoutX="73.0" layoutY="325.0" prefHeight="58.0" prefWidth="244.0" promptText="Client Name" styleClass="desTxt" />
+   <TextField fx:id="clientContact" layoutX="73.0" layoutY="399.0" prefHeight="58.0" prefWidth="244.0" promptText="Contact Number" styleClass="rsTxt" />
 
-   <ComboBox fx:id="serviceTypeCombo" layoutX="87.0" layoutY="472.0" prefHeight="58.0" prefWidth="244.0" promptText="Service Type" styleClass="Cat" />
-   <ComboBox fx:id="staffNameCombo" layoutX="87.0" layoutY="545.0" prefHeight="58.0" prefWidth="244.0" promptText="Staff Name" />
-   <ComboBox fx:id="appointmentTypeCombo" layoutX="87.0" layoutY="618.0" prefHeight="58.0" prefWidth="244.0" promptText="Appointment Type" />
+   <ComboBox fx:id="serviceTypeCombo" layoutX="73.0" layoutY="472.0" prefHeight="58.0" prefWidth="244.0" promptText="Service Type" styleClass="Cat" />
+   <ComboBox fx:id="staffNameCombo" layoutX="73.0" layoutY="545.0" prefHeight="58.0" prefWidth="244.0" promptText="Staff Name" />
+   <ComboBox fx:id="appointmentTypeCombo" layoutX="73.0" layoutY="618.0" prefHeight="58.0" prefWidth="244.0" promptText="Appointment Type" />
 
    <!-- Save Appointment Button -->
-   <Button layoutX="90.0" layoutY="704.0" onAction="#handleAddAppointment" prefHeight="58.0" prefWidth="244.0" text="Add Appointment">
+   <Button layoutX="76.0" layoutY="704.0" onAction="#handleAddAppointment" prefHeight="58.0" prefWidth="244.0" text="Add Appointment">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -39,7 +39,7 @@
    </Button>
 
    <!-- Update Button -->
-   <Button fx:id="updateButton" layoutX="70.0" layoutY="778.0" onAction="#handleUpdate" prefHeight="58.0" prefWidth="140.0" text="Update">
+   <Button fx:id="updateButton" layoutX="56.0" layoutY="778.0" onAction="#handleUpdate" prefHeight="58.0" prefWidth="140.0" text="Update">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -50,7 +50,7 @@
    </Button>
 
    <!-- Delete Button -->
-   <Button layoutX="222.0" layoutY="778.0" onAction="#handleDelete" prefHeight="58.0" prefWidth="140.0" text="Delete">
+   <Button layoutX="208.0" layoutY="778.0" onAction="#handleDelete" prefHeight="58.0" prefWidth="140.0" text="Delete">
       <graphic>
          <ImageView fitHeight="20.0" fitWidth="20.0">
             <image>
@@ -60,8 +60,8 @@
       </graphic>
    </Button>
 
-   <ComboBox fx:id="dateCombobox" layoutX="1118.0" layoutY="46.0" prefHeight="58.0" prefWidth="244.0" promptText="Search by date " styleClass="Cat" />
-   <TextField fx:id="serchClinetNameTxt" layoutX="852.0" layoutY="46.0" prefHeight="58.0" prefWidth="244.0" promptText="Search by Client Name" styleClass="desTxt" />
+   <ComboBox fx:id="dateCombobox" layoutX="1189.0" layoutY="46.0" prefHeight="58.0" prefWidth="244.0" promptText="Search by date " styleClass="Cat" />
+   <TextField fx:id="serchClinetNameTxt" layoutX="929.0" layoutY="46.0" prefHeight="58.0" prefWidth="244.0" promptText="Search by Client Name" styleClass="desTxt" />
 
    <!-- Refresh Button -->
    <Button layoutX="1475.0" layoutY="46.0" onAction="#handleRefresh" prefHeight="58.0" prefWidth="128.0" text="Refresh">
@@ -75,15 +75,15 @@
    </Button>
 
    <!-- TableView Section -->
-   <TableView fx:id="appointmentTable" layoutX="461.0" layoutY="132.0" prefHeight="820.0" prefWidth="1135.0">
+   <TableView fx:id="appointmentTable" layoutX="533.0" layoutY="128.0" prefHeight="820.0" prefWidth="1070.0">
       <columns>
-         <TableColumn fx:id="colDate" prefWidth="162.0" text="Date" />
-         <TableColumn fx:id="colTime" prefWidth="128.0" text="Time" />
-         <TableColumn fx:id="colClientName" prefWidth="183.0" text="Client" />
-         <TableColumn fx:id="colContact" prefWidth="169.0" text="Contact" />
-         <TableColumn fx:id="colService" prefWidth="170.0" text="Service" />
-         <TableColumn fx:id="colStaff" prefWidth="190.0" text="Staff" />
-         <TableColumn fx:id="colAppointmentType" prefWidth="131.0" text="Type" />
+         <TableColumn fx:id="colDate" prefWidth="123.0" text="Date" />
+         <TableColumn fx:id="colTime" prefWidth="153.0" text="Time" />
+         <TableColumn fx:id="colClientName" prefWidth="178.0" text="Client" />
+         <TableColumn fx:id="colContact" prefWidth="158.0" text="Contact" />
+         <TableColumn fx:id="colService" prefWidth="171.0" text="Service" />
+         <TableColumn fx:id="colStaff" prefWidth="140.0" text="Staff" />
+         <TableColumn fx:id="colAppointmentType" prefWidth="145.0" text="Type" />
       </columns>
    </TableView>
    <Label layoutX="67.0" layoutY="54.0" styleClass="task-title" text="Appointment" />

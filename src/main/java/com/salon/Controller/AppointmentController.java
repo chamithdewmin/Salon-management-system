@@ -201,8 +201,7 @@ public class AppointmentController {
                 AppointmentDAO.insertAppointment(appointment);
                 CustomAlert.showSuccess("Appointment Booked!");
 
-                String message = String.format("Hi %s, your %s appointment is confirmed for %s at %02d:%02d %s. - Salon Magical",
-                        appointment.getClientName(), appointment.getAppointmentType(),
+                String message = String.format("Dear Customer, your appointment is confirmed for %s at %02d:%02d %s. - Salon Magical",
                         appointment.getDate(), hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue());
 
                 SmsService.sendSms(appointment.getClientContact(), message);
@@ -212,8 +211,7 @@ public class AppointmentController {
                 AppointmentDAO.updateAppointment(appointment);
                 CustomAlert.showSuccess("Appointment Updated!");
 
-                String message = String.format("Hi %s, your appointment has been updated to %s at %02d:%02d %s. - Salon Magical",
-                        appointment.getClientName(),
+                String message = String.format("Dear Customer, your appointment has been updated to %s at %02d:%02d %s. - Salon Magical",
                         appointment.getDate(),
                         hourCombo.getValue(), minuteCombo.getValue(), ampmCombo.getValue());
 
@@ -242,8 +240,7 @@ public class AppointmentController {
             AppointmentDAO.deleteAppointmentById(selected.getId());
             CustomAlert.showSuccess("Appointment Deleted");
 
-            String message = String.format("Hi %s, your appointment scheduled for %s at %s has been cancelled. - Salon Magical",
-                    selected.getClientName(),
+            String message = String.format("Dear Customer, your appointment scheduled for %s at %s has been cancelled. - Salon Magical",
                     selected.getDate().toString(),
                     selected.getTime().toString().substring(0, 5));
 
@@ -359,8 +356,7 @@ public class AppointmentController {
 
                     if (minutesUntil <= 120 && minutesUntil > 110 && !appt.isReminderSent()) {
                         String reminderMessage = String.format(
-                                "Hi %s, your appointment is today at %s. Please be on time. - Salon Magical",
-                                appt.getClientName(),
+                                "Dear Customer, your appointment is today at %s. Please be on time. - Salon Magical",
                                 appt.getTime().toString().substring(0, 5)
                         );
                         SmsService.sendSms(appt.getClientContact(), reminderMessage);
